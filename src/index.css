@@ -2,25 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .scroll::-webkit-scrollbar {
-    display: none;
-  }
-
-  /**/
-  /* Para Firefox */
-  .scroll-fire{
-
-      scrollbar-width: none;
-    }
-
-.flex-2{
-    flex:2;
+  display: none;
 }
 
-.flex-6{
-    flex:6;
+/**/
+/* Para Firefox */
+.scroll-fire {
+  scrollbar-width: none;
 }
-.flex-5{
-    flex:5;
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-6 {
+  flex: 6;
+}
+.flex-5 {
+  flex: 5;
+}
+
+.boxes {
+  @apply flex flex-col items-center justify-center w-48 h-48 text-xl font-semibold md:h-56 md:w-56 xl:h-72 xl:w-72 md:text-2xl xl:text-4xl rounded-xl;
 }

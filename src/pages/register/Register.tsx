@@ -1,41 +1,113 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-//cambios
+import { SignUp } from "../../utils/type";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import newRequest from "../../Request";
 const Register = () => {
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState<SignUp>({});
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { confirmPassword, ...info } = inputs;
+    try {
+      
+      await newRequest
+        .post("Account/register", info)
+        .then(() => {
+          navigate("/");
+        })
+        .catch((err) => console.log(err.response.data.errors));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 ">
-      <div className="flex flex-row-reverse h-full w-[40%] items-center justify-center">
-        <div className="flex flex-col items-center justify-center flex-1 p-5 scale-110 rounded-lg item1 h-96 gap-7 bg-emerald-500/90">
-          <h2 className="text-2xl font-semibold text-white">
-            Inicio de sesion
+    <div className="flex flex-col items-center justify-center min-h-screen md:flex-row bg-gray-50 ">
+      <div className="block my-10 text-3xl font-semibold text-transparent uppercase md:hidden bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
+        multasab
+      </div>
+      <div className="rounded-tl-[60px] rounded-tr-[60px] md:rounded-none  flex flex-row-reverse h-screen md:h-full  w-full  md:w-[50%] md:items-center justify-center bg-emerald-500/90 md:bg-transparent pt-12">
+        <div className="flex flex-col items-center justify-center flex-1 p-9 lg:p-14 scale-100 bg-transparent rounded-lg md:scale-110 h-[550px] gap-7 md:bg-emerald-500/90">
+          <h2 className="text-3xl font-semibold text-white md:text-2xl">
+            Registro
           </h2>
-          <form className="flex w-[260px] flex-col gap-3">
+          <form
+            className="flex w-[90%] md:w-[260px] lg:w-[300px] flex-col gap-3"
+            onSubmit={handleSubmit}
+          >
             <input
+              onChange={handleOnChange}
               type="text"
+              name="identityUserId"
+              className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
+              placeholder="Cedula"
+            />
+            <input
+              onChange={handleOnChange}
+              type="email"
+              name="email"
+              className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
+              placeholder="Correo"
+            />
+            <input
+              onChange={handleOnChange}
+              type="text"
+              name="name"
               className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
               placeholder="Nombre"
             />
             <input
+              onChange={handleOnChange}
               type="text"
+              name="lastName"
               className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
               placeholder="Apellido"
             />
             <input
-              type="email"
+              onChange={handleOnChange}
+              type="text"
+              name="phoneNumber"
               className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
-              placeholder="Correo"
+              placeholder="Celular"
+            />
+            <input
+              onChange={handleOnChange}
+              type="password"
+              name="password"
+              className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
+              placeholder="Contraseña"
+            />
+            <input
+              onChange={handleOnChange}
+              type="password"
+              name="confirmPassword"
+              className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
+              placeholder="Confirmar contraseña"
             />
 
             <button className="p-2 mt-2 text-black transition duration-300 bg-gray-100 rounded-lg hover:bg-white">
-              Iniciar sesion
+              Registrarme
             </button>
+            <span className="block mt-auto text-sm text-center text-gray-100 md:hidden">
+              ¿Ya tienes cuenta?
+              <Link to="/" className="underline text-rose-500">
+                Inicia sesion
+              </Link>
+            </span>
           </form>
         </div>
-        <div className="flex flex-col items-center justify-center flex-1 gap-5 p-5 ml-3 bg-white rounded-lg item2 h-[400px] border-[1px] border-gray-100">
+        <div className="md:flex hidden  flex-col items-center justify-center flex-1 gap-8 md:p-9 lg:p-14 ml-3 bg-white rounded-lg item2 h-[500px] border-[1px] border-gray-100">
           <div className="mt-auto text-5xl font-semibold text-transparent uppercase bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
             multasab
           </div>
           <div className="text-[gray] ">
-            <p className="w-64 text-lg">
+            <p className="text-xl w-72">
               ¡Que vaina! Registrate pronto, para que puedas iniciar sesion en
               la plataforma, para ver tus multas.
             </p>
