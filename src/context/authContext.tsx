@@ -21,7 +21,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
       })
       .catch((err) => console.log(err));
   };
-  const logout = () => {
+  const logout = async() => {
     setCurrentUser(null);
     localStorage.removeItem('role')
   };
