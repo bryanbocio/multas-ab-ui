@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { SignUp } from "../../utils/type";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
+import { AuthContextType } from "../../context/AuthContextType";
 import axios from "axios";
-import newRequest from "../../Request";
 const Register = () => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState<SignUp>({});
+  const { login, ok, currentUser } = useContext(AuthContext) as AuthContextType;
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -15,9 +18,8 @@ const Register = () => {
     e.preventDefault();
     const { confirmPassword, ...info } = inputs;
     try {
-      
-      await newRequest
-        .post("Account/register", info)
+      await axios
+        .post("https://localhost:5001/api/Account/register", info)
         .then(() => {
           navigate("/");
         })
@@ -26,7 +28,11 @@ const Register = () => {
       console.log(error);
     }
   };
-
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/home");
+    }
+  }, []);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen md:flex-row bg-gray-50 ">
       <div className="block my-10 text-3xl font-semibold text-transparent uppercase md:hidden bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
