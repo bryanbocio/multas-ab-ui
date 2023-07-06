@@ -8,7 +8,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
   return (
     <nav className="sticky top-0 w-full p-5 bg-white border-b-[1px] border-gray-100 flex justify-between z-50">
@@ -68,9 +70,20 @@ const Navbar = () => {
           className="p-1 font-medium text-black rotate-180 rounded-md"
           onClick={handleLogout}
         >
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-</svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-8 h-8"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+            />
+          </svg>
         </button>
       </div>
     </nav>
