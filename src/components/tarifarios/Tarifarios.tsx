@@ -2,14 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import Tarifario from "../tarifario/Tarifario";
 import { Multas } from "../../utils/type";
 import newRequest from "../../Request";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
+import { AuthContextType } from "../../context/AuthContextType";
+import Loader from "../loader/Loader";
 const Tarifarios = () => {
+  const { currentUser } = useContext(AuthContext) as AuthContextType;
   const { data, error, isLoading } = useQuery({
     queryKey: ["multas"],
     queryFn: () => {
-      return newRequest
+      return newRequest(currentUser)
         .get("TrafficFine")
         .then((result) => result.data.data)
-        .catch((error) => console.error(error));
+        .catch((error) => console.log(error));
     },
   });
 
@@ -18,11 +23,7 @@ const Tarifarios = () => {
       {error ? (
         "Error"
       ) : isLoading ? (
-        <div className="flex gap-1 mx-auto col-span-full">
-          <span className="h-6 w-6 rounded-full bg-emerald-400 animate-[bounce_0.9s_infinite_100ms]"></span>
-          <span className="w-6 h-6 rounded-full bg-emerald-400 animate-bounce "></span>
-          <span className="h-6 w-6 rounded-full bg-emerald-400 animate-[bounce_1s_infinite_100ms]"></span>
-        </div>
+        <Loader />
       ) : (
         data.map((e: Multas) => <Tarifario multa={e} key={e.id} />)
       )}
