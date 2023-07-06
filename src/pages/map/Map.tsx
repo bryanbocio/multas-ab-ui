@@ -1,38 +1,43 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { getTrafficFine } from "../../services/MapService";
+import { TrafficFine } from "../../utils/type";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../Request";
+import { AuthContext } from "../../context/authContext";
+import { AuthContextType } from "../../context/AuthContextType";
 const Map = () => {
-  const googleMapsApiKey = "AIzaSyBoA6I2sj3QskEcW2DWdXK618vw1-aKdyo";
-  const [traffic, setTraffic] = useState<any>();
+  const { currentUser } = useContext(AuthContext) as AuthContextType;
+  const googleMapsApiKey =import.meta.env.VITE_PUBLIC_API_KEY
   const { isLoaded } = useLoadScript({ googleMapsApiKey });
   const center = useMemo(() => ({ lat: 18.6678958, lng: -71.4495774 }), []);
-
-  useEffect(() => {
-    const fetchTraffic = async () => {
-      const data = await getTrafficFine();
-      setTraffic(data);
-    };
-    fetchTraffic();
-  }, []);
-  console.log(traffic)
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["mapa"],
+    queryFn: () => {
+      return newRequest(currentUser)
+        .get("TrafficFine")
+        .then((result) => result.data.data)
+        .catch((error) => console.error(error));
+    },
+  });
   return (
     <>
-      {isLoaded ? (
+      {error ? (
+        "error"
+      ) : isLoaded ? (
         <GoogleMap
           zoom={8}
           center={center}
           mapContainerClassName="h-[600px] md:h-full w-full rounded-lg"
-          
         >
-          {traffic &&
-            traffic.map((e: any) => (
+          {!isLoading &&
+            data.map((e: TrafficFine) => (
               <Marker
-                key={e}
+                key={e.id}
                 position={{
                   lat: parseFloat(e.latitude),
                   lng: parseFloat(e.longitude),
                 }}
-                title={"hola personas"}
+                title={e.reason}
               />
             ))}
         </GoogleMap>

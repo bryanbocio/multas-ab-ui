@@ -1,18 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import Tarifario from "../tarifario/Tarifario";
-import { Multas } from "../../utils/type";
-import newRequest from "../../Request";
 import { useContext } from "react";
+import newRequest from "../../Request";
+import { DriverType } from "../../utils/type";
+import Driver from "../driver/Driver";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import Loader from "../loader/Loader";
-const Tarifarios = () => {
+
+const Drivers = () => {
   const { currentUser } = useContext(AuthContext) as AuthContextType;
   const { data, error, isLoading } = useQuery({
-    queryKey: ["multas"],
+    queryKey: ["driver"],
     queryFn: () => {
       return newRequest(currentUser)
-        .get("TrafficFine")
+        .get("Driver")
         .then((result) => result.data.data)
         .catch((error) => console.log(error));
     },
@@ -25,10 +26,10 @@ const Tarifarios = () => {
       ) : isLoading ? (
         <Loader />
       ) : (
-        data.map((e: Multas) => <Tarifario multa={e} key={e.id} />)
+        data.map((e: DriverType) => <Driver key={e.id} driver={e} />)
       )}
     </div>
   );
 };
 
-export default Tarifarios;
+export default Drivers;

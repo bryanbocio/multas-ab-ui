@@ -6,11 +6,11 @@ import { unpackToken } from "../../utils/decompress";
 
 const Leftbar = () => {
   const { currentUser } = useContext(AuthContext) as AuthContextType;
-  const [role, setRole] = useState<any>();
+  const [role, setRole] = useState<string>();
   useEffect(() => {
     const roles = unpackToken(currentUser);
     setRole(roles.role);
-  }, []);
+  }, [currentUser]);
   return (
     <div className=" hidden md:flex md:flex-col justify-between sticky flex-2 lg:flex-1 h-[calc(100vh_-_85px)] p-5 bg-white top-[85px]">
       <div className="flex flex-col mt-5 gap-9">
@@ -19,17 +19,20 @@ const Leftbar = () => {
             Tarifario multas
           </Link>
         </div>
-
-        <div className="">
-          <Link to="/" className="text-lg font-medium ">
-            Consultar Vehiculos
-          </Link>
-        </div>
-        <div className="">
-          <Link to="/" className="text-lg font-medium ">
-            Consultar Conductor
-          </Link>
-        </div>
+        {role !== "USER" && (
+          <div className="">
+            <Link to="/" className="text-lg font-medium ">
+              Consultar Vehiculos
+            </Link>
+          </div>
+        )}
+        {role !== "USER" && (
+          <div className="">
+            <Link to="/drivers" className="text-lg font-medium ">
+              Consultar Conductor
+            </Link>
+          </div>
+        )}
         {role !== "USER" && (
           <div className="">
             <Link to="/applyTrafficFine" className="text-lg font-medium ">

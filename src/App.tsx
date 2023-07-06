@@ -17,6 +17,7 @@ import { AuthContext } from "./context/authContext";
 import { AuthContextType } from "./context/AuthContextType";
 import Map from "./pages/map/Map";
 import ApplyTrafficFine from "./pages/applyTrafficFine/ApplyTrafficFine";
+import CheckDriver from "./pages/checkDriver/CheckDriver";
 function App() {
   const { currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -43,12 +44,13 @@ function App() {
   };
 
   const Private = ({ children }: { children: JSX.Element }) => {
-    const  role: any = localStorage.getItem("role");
+    const role: any = localStorage.getItem("role");
     const roles = JSON.parse(role);
     if (roles.role === "USER") return <Navigate to="/home" />;
 
     return children;
   };
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -77,6 +79,10 @@ function App() {
         {
           path: "/map",
           element: <Map />,
+        },
+        {
+          path: "/drivers",
+          element: <CheckDriver />,
         },
         {
           path: "/applyTrafficFine",
