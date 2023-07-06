@@ -11,7 +11,6 @@ const Weather = () => {
         async function (position) {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
-          console.log(lat +""+ lon)
           setLoading(true);
           await axios
             .get(
@@ -29,11 +28,10 @@ const Weather = () => {
       console.error("Geolocalización no está disponible en este navegador");
     }
   }, []);
-  console.log(data);
   return (
     <div className="flex flex-wrap items-center justify-center gap-5 md:gap-9 lg:gap-12">
       {loading ? (
-          <div className="flex gap-1">
+        <div className="flex gap-1">
           <span className="h-6 w-6 rounded-full bg-emerald-400 animate-[bounce_0.9s_infinite_100ms]"></span>
           <span className="w-6 h-6 rounded-full bg-emerald-400 animate-bounce "></span>
           <span className="h-6 w-6 rounded-full bg-emerald-400 animate-[bounce_1s_infinite_100ms]"></span>
