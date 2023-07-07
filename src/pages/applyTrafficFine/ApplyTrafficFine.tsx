@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { TrafficFine } from "../../utils/type";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import newRequest from "../../Request";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
@@ -69,11 +69,21 @@ const ApplyTrafficFine = () => {
 
     return Object.keys(newErrors).length === 0; // Retorna true si no hay errores
   };
+  const { data } = useQuery({
+    queryKey: ["reason"],
+    queryFn: () => {
+      return newRequest(currentUser)
+        .get("TrafficFine/reasons")
+        .then((results) => results.data)
+        .catch((err) => console.log(err));
+    },
+  });
 
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
   ) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -104,6 +114,7 @@ const ApplyTrafficFine = () => {
       navigate("/home");
     }
   }, [isSuccess]);
+  console.log(input);
   return (
     <div className="container relative mx-auto">
       {errors && (
@@ -139,13 +150,20 @@ const ApplyTrafficFine = () => {
               className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full"
               placeholder="Placa del vehiculo"
             />
-            <input
-              onChange={handleChange}
-              type="text"
+            <select
+              className="p-3 md:p-4 rounded-lg outline-none border-[1px] border-gray-200 w-full bg-transparent"
               name="reason"
-              className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full"
-              placeholder="Razon por la multa"
-            />
+              id=""
+              onChange={handleChange}
+            >
+              <option value="">Selecciona una opción</option>
+              {data &&
+                data.map((item: any, index: number) => (
+                  <option key={index} value={item.reason}>
+                    {item.reason}
+                  </option>
+                ))}
+            </select>
             <input
               onChange={handleChange}
               type="text"

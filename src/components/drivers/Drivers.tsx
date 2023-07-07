@@ -6,6 +6,7 @@ import Driver from "../driver/Driver";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import Loader from "../loader/Loader";
+import Warnings from "../warnings/Warnings";
 
 const Drivers = () => {
   const { currentUser } = useContext(AuthContext) as AuthContextType;
@@ -25,8 +26,10 @@ const Drivers = () => {
         "Error"
       ) : isLoading ? (
         <Loader />
-      ) : (
+      ) : data.length ? (
         data.map((e: DriverType) => <Driver key={e.id} driver={e} />)
+      ) : (
+        <Warnings msg={"No hay multas aun registradas"} />
       )}
     </div>
   );

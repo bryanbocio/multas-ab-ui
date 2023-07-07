@@ -13,7 +13,7 @@ const Navbar = () => {
     }, 1000);
   };
   return (
-    <nav className="sticky top-0 w-full p-5 bg-white border-b-[1px] border-gray-100 flex justify-between z-50">
+    <nav className="sticky top-0 w-full p-5 bg-white border-b-[1px] border-gray-200 flex justify-between z-50">
       <div className="flex items-center gap-5 md:gap-3">
         <button className="block md:hidden">
           <svg
