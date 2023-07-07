@@ -18,6 +18,7 @@ import { AuthContextType } from "./context/AuthContextType";
 import Map from "./pages/map/Map";
 import ApplyTrafficFine from "./pages/applyTrafficFine/ApplyTrafficFine";
 import CheckDriver from "./pages/checkDriver/CheckDriver";
+import TrafficFineDetails from "./pages/trafficFineDetails/TrafficFineDetails";
 function App() {
   const { currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -92,6 +93,10 @@ function App() {
             </Private>
           ),
         },
+        {
+          path:"trafficFineDetails/:id",
+          element: <TrafficFineDetails/>
+        }
       ],
     },
   ]);
