@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import Loader from "../loader/Loader";
+import Warnings from "../warnings/Warnings";
 const Tarifarios = () => {
   const { currentUser } = useContext(AuthContext) as AuthContextType;
   const { data, error, isLoading } = useQuery({
@@ -24,8 +25,10 @@ const Tarifarios = () => {
         "Error"
       ) : isLoading ? (
         <Loader />
-      ) : (
+      ) : data.length ? (
         data.map((e: Multas) => <Tarifario multa={e} key={e.id} />)
+      ) : (
+        <Warnings msg={"No hay multas aun registradas"} />
       )}
     </div>
   );
