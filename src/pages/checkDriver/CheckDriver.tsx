@@ -1,4 +1,3 @@
-import React from "react";
 import Drivers from "../../components/drivers/Drivers";
 
 const CheckDriver = () => {
