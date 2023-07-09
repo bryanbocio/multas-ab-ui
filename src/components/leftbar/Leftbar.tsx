@@ -12,50 +12,50 @@ const Leftbar = () => {
     setRole(roles.role);
   }, [currentUser]);
   return (
-    <div className=" hidden md:flex md:flex-col justify-between sticky flex-2 lg:flex-1 h-[calc(100vh_-_85px)] p-5 bg-white top-[85px]">
+    <div className=" hidden md:flex md:flex-col justify-between sticky flex-2 lg:flex-1 h-[calc(100vh_-_85px)] p-5 bg-white dark:bg-[#333] top-[85px]">
       <div className="flex flex-col mt-5 gap-9">
-        <div className="">
+        <div className="dark:text-[lightgray] ">
           <Link to="/home" className="text-lg font-medium text-emerald-500">
             Tarifario multas
           </Link>
         </div>
         {role !== "USER" && (
-          <div className="">
+          <div className="dark:text-[lightgray] ">
             <Link to="/" className="text-lg font-medium ">
               Consultar Vehiculos
             </Link>
           </div>
         )}
         {role !== "USER" && (
-          <div className="">
+          <div className="dark:text-[lightgray] ">
             <Link to="/drivers" className="text-lg font-medium ">
               Consultar Conductor
             </Link>
           </div>
         )}
         {role !== "USER" && (
-          <div className="">
+          <div className="dark:text-[lightgray] ">
             <Link to="/applyTrafficFine" className="text-lg font-medium ">
               Aplicar Multa
             </Link>
           </div>
         )}
-        <div className="">
+        <div className="dark:text-[lightgray] ">
           <Link to="/" className="text-lg font-medium ">
             Multas Registradas
           </Link>
         </div>
-        <div className="">
+        <div className="dark:text-[lightgray] ">
           <Link to="/map" className="text-lg font-medium ">
             Mapa de Multas
           </Link>
         </div>
-        <div className="">
+        <div className="dark:text-[lightgray] ">
           <Link to="/" className="text-lg font-medium ">
             Noticias
           </Link>
         </div>
-        <div className="">
+        <div className="dark:text-[lightgray] ">
           <Link to="/weather" className="text-lg font-medium ">
             Estado del Clima
           </Link>
