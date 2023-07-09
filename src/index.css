@@ -6,6 +6,9 @@
   display: none;
 }
 
+* {
+  @apply transition-all duration-300;
+}
 /**/
 /* Para Firefox */
 .scroll-fire {
@@ -25,4 +28,8 @@
 
 .boxes {
   @apply flex flex-col items-center justify-center w-48 h-48 text-xl font-semibold md:h-56 md:w-56 xl:h-72 xl:w-72 md:text-2xl xl:text-4xl rounded-xl;
+}
+
+.inputs input {
+  @apply dark:bg-[#333] dark:text-[whitesmoke] dark:placeholder-[lightgray];
 }
