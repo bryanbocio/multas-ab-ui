@@ -25,7 +25,7 @@ function App() {
   const Layout = () => {
     return (
       <QueryClientProvider client={queryClient}>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 dark:bg-[#222] ">
           <Navbar />
           <div className="flex">
             <Leftbar />
