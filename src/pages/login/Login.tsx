@@ -28,12 +28,12 @@ const Login = () => {
     }
   }, [ok]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen md:flex-row bg-gray-50 ">
+    <div className="flex flex-col items-center justify-center min-h-screen md:flex-row bg-gray-50 dark:bg-[#222]">
       <div className="block my-10 text-3xl font-semibold text-transparent uppercase md:hidden bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
         multasab
       </div>
-      <div className="rounded-tl-[60px] rounded-tr-[60px] md:rounded-none  flex h-screen md:h-full  w-full  md:w-[50%] md:items-center justify-center bg-emerald-500/90 md:bg-transparent pt-12">
-        <div className="flex flex-col items-center justify-center flex-1 p-9 lg:p-14 scale-100 bg-transparent rounded-lg md:scale-110 item1 h-[550px] gap-8 md:bg-emerald-500/90">
+      <div className="rounded-tl-[60px] rounded-tr-[60px] md:rounded-none  flex h-screen md:h-full  w-full  md:w-[50%] md:items-center justify-center bg-emerald-500/90  md:bg-transparent pt-12">
+        <div className="flex flex-col items-center justify-center flex-1 p-9 lg:p-14 scale-100 bg-transparent rounded-lg md:scale-110 item1 h-[550px] gap-8 md:bg-emerald-500/90 dark:md:bg-emerald-600">
           <h2 className="text-4xl font-semibold text-white md:text-2xl">
             Inicio de sesion
           </h2>
@@ -80,17 +80,17 @@ const Login = () => {
             </span>
           </form>
         </div>
-        <div className="md:flex hidden  flex-col items-center justify-center flex-1 gap-8 md:p-9 lg:p-14 ml-3 bg-white rounded-lg item2 h-[500px] border-[1px] border-gray-100">
+        <div className="md:flex hidden  flex-col items-center justify-center flex-1 gap-8 md:p-9 lg:p-14 ml-3 bg-white dark:bg-[#444] rounded-lg item2 h-[500px] border-[1px] border-gray-100 dark:border-gray-400">
           <div className="mt-auto text-5xl font-semibold text-transparent uppercase bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
             multasab
           </div>
-          <div className="text-[gray] ">
+          <div className="text-[gray] dark:text-[lightgray] ">
             <p className="w-64 text-xl ml-9">
               ¡Wow! Te pusieron una multa. Inicia sesion para ver cuales fueron.
             </p>
           </div>
 
-          <span className="text-lg text-center text-[gray] mt-auto">
+          <span className="text-lg text-center text-[gray] dark:text-[lightgray] mt-auto">
             ¿No tienes una cuenta?
             <Link to="/register" className="underline text-rose-500">
               Crea una

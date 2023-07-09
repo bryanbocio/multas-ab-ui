@@ -18,12 +18,6 @@ const TrafficFineDetails = () => {
         .catch((err) => console.log(err));
     },
   });
-  /*
-    "agentId": "402",
-    "name": "ramon",
-    "lastName": "tolentino",
-    "number": "809",
-  */
   console.log(isLoading ? "Loading" : data);
   return (
     <div className="flex flex-col gap-5  container justify-center items-center max-h-fit">
@@ -34,7 +28,7 @@ const TrafficFineDetails = () => {
       ) : (
         <>
           <div className="top flex flex-col md:flex-row gap-5 md:gap-10 w-full ">
-            <div className="left flex-1 bg-white rounded-lg shadow-md p-6 flex flex-col gap-2">
+            <div className="left flex-1 bg-white dark:bg-[#444] rounded-lg shadow-md p-6 flex flex-col gap-2 dark:text-[whitesmoke]">
               <div className="flex items-center">
                 <img
                   src="https://i.ibb.co/0t7tvpY/conductor-1.png"
@@ -62,7 +56,7 @@ const TrafficFineDetails = () => {
                 {data.driver.number}
               </div>
             </div>
-            <div className="right flex-1 bg-white rounded-lg shadow-md p-6 flex flex-col gap-2">
+            <div className="right flex-1 bg-white dark:bg-[#444] rounded-lg shadow-md p-6 flex flex-col gap-2 dark:text-[whitesmoke]">
               <div className="flex items-center">
                 <img
                   src="https://i.ibb.co/tqBmssC/conductor.png"
@@ -91,7 +85,7 @@ const TrafficFineDetails = () => {
               </div>
             </div>
           </div>
-          <div className="bottom bg-white p-6 rounded-lg w-full shadow-md flex flex-col gap-2 ">
+          <div className="bottom bg-white dark:bg-[#444] p-6 rounded-lg w-full shadow-md flex flex-col gap-2 dark:text-[whitesmoke]">
             <div className="flex items-center">
               <img
                 src="https://i.ibb.co/7k7kc4n/multa-por-exceso-de-velocidad-1.png"
