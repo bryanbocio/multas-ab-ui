@@ -109,7 +109,9 @@ const ApplyTrafficFine = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
+
     if (isSuccess) {
       navigate("/home");
     }
@@ -128,7 +130,7 @@ const ApplyTrafficFine = () => {
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col w-full gap-2 md:gap-10 md:flex-row">
-          <div className="flex flex-col flex-1 gap-2 md:gap-3">
+          <div className="flex flex-col flex-1 gap-2 md:gap-3 inputs">
             <input
               onChange={handleChange}
               type="text"
@@ -151,7 +153,7 @@ const ApplyTrafficFine = () => {
               placeholder="Placa del vehiculo"
             />
             <select
-              className="p-3 md:p-4 rounded-lg outline-none border-[1px] border-gray-200 w-full bg-transparent"
+              className="p-3 md:p-4 rounded-lg outline-none border-[1px] border-gray-200 w-full bg-transparent dark:bg-[#333] dark:text-[lightgray]"
               name="reason"
               id=""
               onChange={handleChange}
@@ -186,13 +188,13 @@ const ApplyTrafficFine = () => {
               placeholder="Longitud"
             />
           </div>
-          <div className="flex flex-col flex-1 gap-2 md:gap-3">
+          <div className="flex flex-col flex-1 gap-2 md:gap-3 inputs">
             <textarea
               cols={10}
               rows={9}
               onChange={handleChange}
               name="comment"
-              className=" p-2 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full h-16 md:h-1/2  lg:h-full"
+              className=" p-2 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full h-16 md:h-1/2  lg:h-full dark:bg-[#333] dark:text-[whitesmoke] dark:placeholder-[lightgray]"
               placeholder="Comentario"
             />
             <input
@@ -203,14 +205,14 @@ const ApplyTrafficFine = () => {
               placeholder="Identidad del agente"
             />
             <button className="hidden w-full p-4 font-medium text-white bg-gray-200 rounded-md md:block border-[1px] border-gray-300 hover:bg-emerald-500/90 transition duration-300 group">
-              <span className="text-base font-semibold text-transparent transition duration-300 lg:text-lg bg-gradient-to-r from-orange-500 via-indigo-500 to-rose-500 bg-clip-text group-hover:bg-transparent group-hover:text-white ">
+              <span className="text-base font-semibold text-transparent transition duration-300 lg:text-lg bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text group-hover:bg-transparent group-hover:text-white ">
                 Agregar multa
               </span>
             </button>
           </div>
         </div>
         <button className="block w-full p-3 font-medium text-white rounded-md md:hidden border-[1px] border-gray-300 bg-gray-200  hover:bg-emerald-500/90 transition duration-300 group">
-          <span className="text-base font-semibold text-transparent transition duration-300 bg-gradient-to-r from-orange-500 via-indigo-500 to-rose-500 bg-clip-text group-hover:bg-transparent group-hover:text-white ">
+          <span className="text-base font-semibold text-transparent transition duration-300 bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text group-hover:bg-transparent group-hover:text-white ">
             Agregar multa
           </span>
         </button>
