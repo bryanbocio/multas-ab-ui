@@ -6,7 +6,7 @@ interface Props {
 }
 const Driver: React.FC<Props> = ({ driver }) => {
   return (
-    <div className="w-full rounded-lg p-4 border-[1px] border-gray-200 bg-white  flex flex-col gap-2">
+    <div className="w-full rounded-lg p-4 border-[1px] border-gray-200 bg-white dark:bg-[#444] dark:text-[whitesmoke]  flex flex-col gap-2 dark:border-[#444]">
       <h2 className="font-semibold text-xl">
         {driver.name} {driver.lastName}
       </h2>
