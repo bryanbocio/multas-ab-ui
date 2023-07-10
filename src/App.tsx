@@ -19,6 +19,7 @@ import Map from "./pages/map/Map";
 import ApplyTrafficFine from "./pages/applyTrafficFine/ApplyTrafficFine";
 import CheckDriver from "./pages/checkDriver/CheckDriver";
 import TrafficFineDetails from "./pages/trafficFineDetails/TrafficFineDetails";
+import Basket from "./pages/basket/Basket";
 function App() {
   const { currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -96,6 +97,10 @@ function App() {
         {
           path:"trafficFineDetails/:id",
           element: <TrafficFineDetails/>
+        },
+        {
+          path:"basket",
+          element: <Basket/>
         }
       ],
     },
