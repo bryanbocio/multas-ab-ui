@@ -18,7 +18,6 @@ const TrafficFineDetails = () => {
         .catch((err) => console.log(err));
     },
   });
-  console.log(isLoading ? "Loading" : data);
   return (
     <div className="flex flex-col gap-5  container justify-center items-center max-h-fit">
       {error ? (
@@ -85,7 +84,7 @@ const TrafficFineDetails = () => {
               </div>
             </div>
           </div>
-          <div className="bottom bg-white dark:bg-[#444] p-6 rounded-lg w-full shadow-md flex flex-col gap-2 dark:text-[whitesmoke]">
+          <div className="bottom bg-white dark:bg-[#444] p-6 rounded-lg w-full shadow-md flex flex-col gap-2 dark:text-[whitesmoke] items-start">
             <div className="flex items-center">
               <img
                 src="https://i.ibb.co/7k7kc4n/multa-por-exceso-de-velocidad-1.png"
@@ -95,20 +94,20 @@ const TrafficFineDetails = () => {
               <h2 className="text-xl mb-2 md:text-2xl font-semibold ">Multa</h2>
             </div>
             <span className="font-medium text-lg capitalize ">
-              {" "}
               <span className="font-semibold">Placa: </span>
               {data.carPlate}
             </span>
             <span className="font-medium text-lg capitalize">
-              {" "}
               <span className="font-semibold">Razon: </span>
               {data.reason}
             </span>
             <span className="font-medium text-lg capitalize">
-              {" "}
               <span className="font-semibold">Comentario: </span>
               {data.comment}
             </span>
+            <button className="bg-emerald-500 dark:bg-emerald-600  p-2 font-semibold text-white dark:text-[whitesmoke] rounded-lg">
+              Pagar luego
+            </button>
           </div>
         </>
       )}
