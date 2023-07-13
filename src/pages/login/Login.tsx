@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 const Login = () => {
-  const { login, ok, currentUser } = useContext(AuthContext) as AuthContextType;
+  const { login, ok, token } = useContext(AuthContext) as AuthContextType;
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Login = () => {
     if (ok) {
       navigate("/home");
     }
-    if (currentUser) {
+    if (token) {
       navigate("/home");
     }
   }, [ok]);
