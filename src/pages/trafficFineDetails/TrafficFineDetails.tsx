@@ -1,23 +1,46 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import newRequest from "../../Request";
-const TrafficFineDetails = () => {
+import { Basket } from "../../utils/type";
+ const TrafficFineDetails = () => {
   const { pathname } = useLocation();
-  const { currentUser } = useContext(AuthContext) as AuthContextType;
+  const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const trafficFineId = pathname.split("/")[2];
 
+  const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
     queryKey: ["oneTrafficFine"],
     queryFn: () => {
-      return newRequest(currentUser)
+      return newRequest(token)
         .get(`TrafficFine/${trafficFineId}`)
         .then((response) => response.data)
         .catch((err) => console.log(err));
     },
   });
+  const { mutate } = useMutation({
+    mutationFn: (newTodo: Basket) => {
+      return newRequest(token).post("Basket", newTodo);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["basketItem"]);
+      queryClient.invalidateQueries(["basketItemMobile"]);
+    },
+  });
+  const AddToCart = () => {
+    mutate({
+      id: currentUser.given_name,
+      items: [
+        {
+          id: Math.floor(Math.random() * 1000000),
+          trafficFineId: data.id,
+          trafficFinePrice: 400,
+        },
+      ],
+    });
+  };
   return (
     <div className="flex flex-col gap-5  container justify-center items-center max-h-fit">
       {error ? (
@@ -105,7 +128,10 @@ const TrafficFineDetails = () => {
               <span className="font-semibold">Comentario: </span>
               {data.comment}
             </span>
-            <button className="bg-emerald-500 dark:bg-emerald-600  p-2 font-semibold text-white dark:text-[whitesmoke] rounded-lg">
+            <button
+              onClick={AddToCart}
+              className="bg-emerald-500 dark:bg-emerald-600  p-2 font-semibold text-white dark:text-[whitesmoke] rounded-lg"
+            >
               Pagar luego
             </button>
           </div>
