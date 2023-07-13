@@ -1,8 +1,9 @@
-import { SignIn } from "../utils/type";
+import { SignIn, TokenType } from "../utils/type";
 
 export interface AuthContextType {
   login: (input: SignIn) => void;
   ok: boolean;
-  currentUser: string;
+  token: string;
+  currentUser: TokenType;
   logout: () => void;
 }
