@@ -1,35 +1,34 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../Request";
-import { ThemeContext } from "../../context/themeContext";
-import { ThemeContextType } from "../../context/ThemeContextType";
-import { unpackToken } from "../../utils/decompress";
 import Config from "../config/Config";
+import LeftBarMobile from "../leftbarMobile/LeftBarMobile";
 
 const Navbar = () => {
-  const { currentUser } = useContext(AuthContext) as AuthContextType;
-  const personId = unpackToken(currentUser);
+  const { token, currentUser } = useContext(AuthContext) as AuthContextType;
+  const [showMobile, setShowMobile] = useState<boolean>(false);
   const [openConfig, setOpenConfig] = useState<boolean>(false);
-
   const { data } = useQuery({
     queryKey: ["basketItem"],
     queryFn: () => {
-      return newRequest(currentUser)
-        .get(`Basket?id=${personId.given_name}`)
+      return newRequest(token)
+        .get(`Basket?id=${currentUser.given_name}`)
         .then((results) => results.data)
         .catch((err) => console.log(err));
     },
   });
   const basketCount = data && data.items.length;
-  console.log(data);
   return (
     <nav className="sticky top-0 w-full p-5 bg-white border-b-[1px] border-gray-200 dark:border-[#444] dark:bg-[#333]  flex justify-between z-50">
       <div className="flex items-center gap-5 md:gap-3">
         {/* Mobile */}
-        <button className="block md:hidden dark:text-[whitesmoke]">
+        <button
+          className="block md:hidden dark:text-[whitesmoke]"
+          onClick={() => setShowMobile(!showMobile)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -45,6 +44,7 @@ const Navbar = () => {
             />
           </svg>
         </button>
+        {showMobile && <LeftBarMobile setShowMobile={setShowMobile}/>}
         <div className="text-3xl font-semibold text-transparent uppercase bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
           <Link to="/home">multasab</Link>
         </div>
