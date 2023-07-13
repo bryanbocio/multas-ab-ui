@@ -8,7 +8,7 @@ import axios from "axios";
 const Register = () => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState<SignUp>({});
-  const { login, ok, currentUser } = useContext(AuthContext) as AuthContextType;
+  const { token } = useContext(AuthContext) as AuthContextType;
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -29,7 +29,7 @@ const Register = () => {
     }
   };
   useEffect(() => {
-    if (currentUser) {
+    if (token) {
       navigate("/home");
     }
   }, []);
