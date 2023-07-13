@@ -8,7 +8,7 @@ import { AuthContextType } from "../../context/AuthContextType";
 
 const ApplyTrafficFine = () => {
   const queryClient = useQueryClient();
-  const { currentUser } = useContext(AuthContext) as AuthContextType;
+  const { token } = useContext(AuthContext) as AuthContextType;
   const navigate = useNavigate();
   const [input, setInputs] = useState<TrafficFine>({
     driverIdentity: "",
@@ -72,7 +72,7 @@ const ApplyTrafficFine = () => {
   const { data } = useQuery({
     queryKey: ["reason"],
     queryFn: () => {
-      return newRequest(currentUser)
+      return newRequest(token)
         .get("TrafficFine/reasons")
         .then((results) => results.data)
         .catch((err) => console.log(err));
@@ -90,7 +90,7 @@ const ApplyTrafficFine = () => {
 
   const { mutateAsync, isSuccess } = useMutation({
     mutationFn: (newTodo: TrafficFine) => {
-      return newRequest(currentUser).post("TrafficFine", newTodo);
+      return newRequest(token).post("TrafficFine", newTodo);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["multas"]);
@@ -111,12 +111,10 @@ const ApplyTrafficFine = () => {
   };
 
   useEffect(() => {
-
     if (isSuccess) {
       navigate("/home");
     }
   }, [isSuccess]);
-  console.log(input);
   return (
     <div className="container relative mx-auto">
       {errors && (

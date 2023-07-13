@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { SignIn } from "../utils/type";
+import { SignIn, TokenType } from "../utils/type";
 
 import axios from "axios";
 import { unpackToken } from "../utils/decompress";
@@ -8,30 +8,35 @@ interface Props {
   children: React.ReactNode;
 }
 const AuthContextProvider: React.FC<Props> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("user")!) || null
+  const [currentUser, setCurrentUser] = useState<TokenType>(
+    unpackToken(JSON.parse(localStorage.getItem("token")!)) || null
   );
+
+  const [token, setToken] = useState(
+    JSON.parse(localStorage.getItem("token")!) || null
+  );
+
   const [ok, setOk] = useState<boolean>(false);
   const login = async (inputs: SignIn): Promise<void> => {
     axios
       .post("https://localhost:5001/api/Account/login", inputs)
       .then((results) => {
-        setCurrentUser(results.data.token);
+        setToken(results.data.token);
         setOk(true);
       })
       .catch((err) => console.log(err));
   };
   const logout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem('role')
+    setToken(null);
+    setOk(false);
   };
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
-    localStorage.setItem("role", JSON.stringify(unpackToken(currentUser)));
-  }, [currentUser]);
 
+  useEffect(() => {
+    localStorage.setItem("token", JSON.stringify(token));
+    setCurrentUser(unpackToken(token));
+  }, [token]);
   return (
-    <AuthContext.Provider value={{ login, ok, currentUser, logout }}>
+    <AuthContext.Provider value={{ login, ok, token, currentUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -13,9 +13,7 @@ const Config: React.FC<Props> = ({ setOpenConfig }) => {
   const { toggle, darkMode } = useContext(ThemeContext) as ThemeContextType;
   const handleLogout = () => {
     logout();
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+    navigate("/");
   };
   return (
     <div className="absolute top-[67px]  bg-white dark:bg-[#333] overflow-hidden flex flex-col inset-x-0 w-[200px] -left-28 rounded-lg  gap-2 ">

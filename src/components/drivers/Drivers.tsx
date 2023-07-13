@@ -9,11 +9,11 @@ import Loader from "../loader/Loader";
 import Warnings from "../warnings/Warnings";
 
 const Drivers = () => {
-  const { currentUser } = useContext(AuthContext) as AuthContextType;
+  const { token } = useContext(AuthContext) as AuthContextType;
   const { data, error, isLoading } = useQuery({
     queryKey: ["driver"],
     queryFn: () => {
-      return newRequest(currentUser)
+      return newRequest(token)
         .get("Driver")
         .then((result) => result.data.data)
         .catch((error) => console.log(error));

@@ -11,6 +11,27 @@ export interface Multas {
   dateCreated: Date;
   agentIdentity: string;
 }
+export interface Basket {
+  id: string;
+  items: [
+    {
+      id?: number;
+      trafficFineId: number;
+      trafficFinePrice: number;
+    }
+  ];
+}
+
+export interface TokenType {
+  email: string;
+  given_name: string;
+  role: string | object;
+  nbf?: number;
+  exp?: number;
+  iat?: number;
+  iss?: string;
+  aud?: string;
+}
 export interface DriverType {
   id?: number;
   driverIdentity: string;

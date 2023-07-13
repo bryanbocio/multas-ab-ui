@@ -7,13 +7,19 @@ import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import Loader from "../loader/Loader";
 import Warnings from "../warnings/Warnings";
+import { hasMultipleRoles } from "../../utils/Roles";
 const Tarifarios = () => {
-  const { currentUser } = useContext(AuthContext) as AuthContextType;
+  const { token, currentUser } = useContext(AuthContext) as AuthContextType;
+  const role = hasMultipleRoles(currentUser.role);
   const { data, error, isLoading } = useQuery({
     queryKey: ["multas"],
     queryFn: () => {
-      return newRequest(currentUser)
-        .get("TrafficFine")
+      return newRequest(token)
+        .get(
+          role
+            ? "TrafficFine"
+            : `TrafficFine?IdentityDriver=${currentUser.given_name}`
+        )
         .then((result) => result.data.data)
         .catch((error) => console.log(error));
     },

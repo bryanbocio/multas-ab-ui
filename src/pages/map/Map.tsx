@@ -6,14 +6,14 @@ import newRequest from "../../Request";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 const Map = () => {
-  const { currentUser } = useContext(AuthContext) as AuthContextType;
+  const { token } = useContext(AuthContext) as AuthContextType;
   const googleMapsApiKey =import.meta.env.VITE_PUBLIC_API_KEY
   const { isLoaded } = useLoadScript({ googleMapsApiKey });
   const center = useMemo(() => ({ lat: 18.6678958, lng: -71.4495774 }), []);
   const { data, error, isLoading } = useQuery({
     queryKey: ["mapa"],
     queryFn: () => {
-      return newRequest(currentUser)
+      return newRequest(token)
         .get("TrafficFine")
         .then((result) => result.data.data)
         .catch((error) => console.error(error));
