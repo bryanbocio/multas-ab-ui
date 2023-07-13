@@ -20,8 +20,9 @@ import ApplyTrafficFine from "./pages/applyTrafficFine/ApplyTrafficFine";
 import CheckDriver from "./pages/checkDriver/CheckDriver";
 import TrafficFineDetails from "./pages/trafficFineDetails/TrafficFineDetails";
 import Basket from "./pages/basket/Basket";
+import { hasMultipleRoles } from "./utils/Roles";
 function App() {
-  const { currentUser } = useContext(AuthContext) as AuthContextType;
+  const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
   const Layout = () => {
     return (
@@ -40,15 +41,13 @@ function App() {
     );
   };
   const PrivateRoutes = ({ children }: { children: JSX.Element }) => {
-    if (currentUser == null || currentUser == "") return <Navigate to="/" />;
+    if (token == null || token == "") return <Navigate to="/" />;
 
     return children;
   };
 
   const Private = ({ children }: { children: JSX.Element }) => {
-    const role: any = localStorage.getItem("role");
-    const roles = JSON.parse(role);
-    if (roles.role === "USER") return <Navigate to="/home" />;
+    if (!hasMultipleRoles(currentUser.role)) return <Navigate to="/home" />;
 
     return children;
   };
@@ -84,7 +83,11 @@ function App() {
         },
         {
           path: "/drivers",
-          element: <CheckDriver />,
+          element: (
+            <Private>
+              <CheckDriver />
+            </Private>
+          ),
         },
         {
           path: "/applyTrafficFine",
@@ -95,13 +98,13 @@ function App() {
           ),
         },
         {
-          path:"trafficFineDetails/:id",
-          element: <TrafficFineDetails/>
+          path: "trafficFineDetails/:id",
+          element: <TrafficFineDetails />,
         },
         {
-          path:"basket",
-          element: <Basket/>
-        }
+          path: "basket",
+          element: <Basket />,
+        },
       ],
     },
   ]);
