@@ -8,7 +8,7 @@ import { AuthContextType } from "../../context/AuthContextType";
 
 const ApplyTrafficFine = () => {
   const queryClient = useQueryClient();
-  const { token } = useContext(AuthContext) as AuthContextType;
+  const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const navigate = useNavigate();
   const [input, setInputs] = useState<TrafficFine>({
     driverIdentity: "",
@@ -20,7 +20,7 @@ const ApplyTrafficFine = () => {
     latitude: "",
     longitude: "",
     dateCreated: new Date(),
-    agentIdentity: "",
+    agentIdentity: currentUser.given_name,
   });
   const [errors, setErrors] = useState<boolean>(false);
   const validateInputs = () => {
@@ -59,12 +59,6 @@ const ApplyTrafficFine = () => {
     if (!input.longitude.trim()) {
       newErrors.longitude = "Por favor, ingresa una longitud";
     }
-
-    if (!input.agentIdentity.trim()) {
-      newErrors.agentIdentity =
-        "Por favor, ingresa una identificación del agente";
-    }
-
     //setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0; // Retorna true si no hay errores
@@ -98,6 +92,7 @@ const ApplyTrafficFine = () => {
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(input)
     try {
       const isValid = validateInputs();
       if (isValid) {
@@ -198,12 +193,14 @@ const ApplyTrafficFine = () => {
             <input
               onChange={handleChange}
               type="text"
+disabled 
+value={input.agentIdentity}
               name="agentIdentity"
-              className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full"
+              className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full text-[gray]"
               placeholder="Identidad del agente"
             />
-            <button className="hidden w-full p-4 font-medium text-white bg-gray-200 rounded-md md:block border-[1px] border-gray-300 hover:bg-emerald-500/90 transition duration-300 group">
-              <span className="text-base font-semibold text-transparent transition duration-300 lg:text-lg bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text group-hover:bg-transparent group-hover:text-white ">
+            <button className="hidden w-full p-4 font-medium text-white bg-gray-200 rounded-md md:block border-[1px] border-gray-300 hover:bg-emerald-500/90 transition duration-300 group dark:bg-stone-600">
+              <span className="text-base font-semibold text-transparent transition duration-300 lg:text-lg bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text dark:from-emerald-500 dark:via-yellow-500 dark:to-orange-500 group-hover:bg-transparent group-hover:text-white ">
                 Agregar multa
               </span>
             </button>

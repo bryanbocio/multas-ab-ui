@@ -9,7 +9,7 @@ const Basket = () => {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const [total, setTotal] = useState<number>(0);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["basketItems"],
     queryFn: () => {
       return newRequest(token)
@@ -19,9 +19,10 @@ const Basket = () => {
     },
   });
   return (
-    <div className="container mx-auto flex md:flex-row flex-col relative gap-5 lg:gap-10   md:items-start">
+    <div className="container relative flex flex-col gap-5 mx-auto md:flex-row lg:gap-10 md:items-start">
       <div className="flex-2 bg-white dark:bg-[#444] p-3 rounded-lg dark:text-[lightgray] text-black flex flex-col gap-6 justify-center">
-        {isLoading
+        {error?"Error":
+        isLoading
           ? "Loading..."
           : data.length
           ? data.map((e: any) => (
@@ -41,13 +42,13 @@ const Basket = () => {
         <span className="text-xl lg:text-2xl font-semibold dark:text-[lightgray] ">
           Total {total !== 0 && `RD$${total}`}
         </span>
-        <button className="p-1 bg-emerald-500/90 rounded-md text-white text-lg font-semibold">
+        <button className="p-1 text-lg font-semibold text-white rounded-md bg-emerald-500/90">
           Pagar
         </button>
       </div>
 
-      <div className="block md:hidden w-full">
-        <button className="bg-emerald-500/90 rounded-lg font-semibold p-2 text-lg w-full text-white">
+      <div className="block w-full md:hidden">
+        <button className="w-full p-2 text-lg font-semibold text-white rounded-lg bg-emerald-500/90">
           Pagar multas
         </button>
       </div>

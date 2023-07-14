@@ -12,7 +12,7 @@ interface Props {
 
 const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
   const { token } = useContext(AuthContext) as AuthContextType;
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["basketTrafficFines"],
     queryFn: () => {
       return newRequest(token)
@@ -40,7 +40,9 @@ const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
 
   return (
     <div>
-      {isLoading
+      {error
+        ? "Error"
+        : isLoading
         ? "loading..."
         : data.map(
             (e: any) =>
@@ -51,16 +53,16 @@ const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
                 >
                   <input
                     type="checkbox"
-                    className="w-4 h-4 rounded-lg hidden md:block"
+                    className="hidden w-4 h-4 rounded-lg md:block"
                     onChange={handleCheckboxChange}
                     value={reasonData
                       .filter((reason: any) => reason.reason == e.reason)
                       .map((obj: any) => obj.price)}
                   />
-                  <div className="flex flex-col gap-2 max-w-3xl">
+                  <div className="flex flex-col max-w-3xl gap-2">
                     <span className="text-xl font-semibold">{e.reason}</span>
                     <span className="text-lg font-medium">{e.comment}</span>
-                    <span className="font-medium mt-2">
+                    <span className="mt-2 font-medium">
                       RD$
                       {reasonData
                         .filter((reason: any) => reason.reason == e.reason)
