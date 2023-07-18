@@ -20,8 +20,8 @@ const Footbar = () => {
     },
   });
   return (
-    <div className="sticky inset-x-0 bottom-0 block overflow-hidden bg-[#f6f3f3] dark:bg-[#333] md:hidden backdrop-blur-md border-t-[1px] border-gray-300 dark:border-[#444]">
-      <div className="flex justify-center gap-5 p-3 items-center font-semibold text-white">
+    <div className="sticky inset-x-0 bottom-0 z-10 block overflow-hidden bg-[#f6f3f3] dark:bg-[#333] md:hidden backdrop-blur-md border-t-[1px] border-gray-300 dark:border-[#444]">
+      <div className="flex items-center justify-center gap-5 p-3 font-semibold text-white">
         <button
           className="flex gap-1 items-center p-2  font-medium  dark:text-[lightgray] text-black"
           onClick={toggle}
@@ -62,9 +62,9 @@ const Footbar = () => {
             </>
           )}
         </button>
-        <div className="relative cursor-pointer block md:hidden">
+        <div className="relative block cursor-pointer md:hidden">
           {data && data.items.length !== 0 && (
-            <span className="absolute -top-0 right-0 bg-rose-500 rounded-full h-4 w-4 p-1 text-xs text-white flex items-center justify-center">
+            <span className="absolute right-0 flex items-center justify-center w-4 h-4 p-1 text-xs text-white rounded-full -top-0 bg-rose-500">
               {data.items.length}
             </span>
           )}

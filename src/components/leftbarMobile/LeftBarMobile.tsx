@@ -11,7 +11,7 @@ const LeftBarMobile: React.FC<Props> = ({ setShowMobile }) => {
   const { currentUser } = useContext(AuthContext) as AuthContextType;
   const role = hasMultipleRoles(currentUser.role);
   return (
-    <div className="fixed  inset-x-0 top-[77px] bottom-[72px] block md:hidden z-10  bg-[#f6f3f3] dark:bg-[#444]">
+    <div className="fixed  inset-x-0 top-[77px] bottom-[72px] overflow-scroll block md:hidden z-10  bg-[#f6f3f3] dark:bg-[#444]">
       <div className="flex flex-col gap-2 pt-5">
         <div
           className="dark:text-[lightgray] hover:bg-gray-200 dark:hover:bg-[#333] p-3"

@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import BasketItem from "../../components/basketItem/BasketItem";
 import ErrorComponent from "../../components/errorComponent/ErrorComponent";
+import Loader from "../../components/loader/Loader";
 
 const Basket = () => {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
@@ -21,11 +22,15 @@ const Basket = () => {
   });
   return (
     <div className="container relative flex flex-col gap-5 mx-auto md:flex-row lg:gap-10 md:items-start">
-      <div className="flex-2 bg-white dark:bg-[#444] p-3 rounded-lg dark:text-[lightgray] text-black flex flex-col gap-6 justify-center">
+      <div
+        className={`flex-2 ${
+          error ? "bg-transparent" : "bg-white dark:bg-[#444]"
+        } p-3 rounded-lg dark:text-[lightgray] text-black flex flex-col gap-6 justify-center`}
+      >
         {error ? (
           <ErrorComponent />
         ) : isLoading ? (
-          "Loading..."
+          <Loader />
         ) : data.length ? (
           data.map((e: any) => (
             <BasketItem
@@ -47,14 +52,16 @@ const Basket = () => {
           Total {total !== 0 && `RD$${total}`}
         </span>
         <button className="p-1 text-lg font-semibold text-white rounded-md bg-emerald-500/90">
-          Pagar
+          Pagar multas
         </button>
       </div>
 
       <div className="block w-full md:hidden">
-        <button className="w-full p-2 text-lg font-semibold text-white rounded-lg bg-emerald-500/90">
-          Pagar multas
-        </button>
+        {!error && (
+          <button className="w-full p-2 text-lg font-semibold text-white rounded-lg bg-emerald-500/90">
+            Pagar multas
+          </button>
+        )}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../Request";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
+import Loader from "../../components/loader/Loader";
 const Map = () => {
   const { token } = useContext(AuthContext) as AuthContextType;
   const googleMapsApiKey =import.meta.env.VITE_PUBLIC_API_KEY
@@ -42,7 +43,10 @@ const Map = () => {
             ))}
         </GoogleMap>
       ) : (
-        "Loading..."
+        <div className="flex justify-center w-full">
+
+        <Loader/>
+        </div>
       )}
     </>
   );
