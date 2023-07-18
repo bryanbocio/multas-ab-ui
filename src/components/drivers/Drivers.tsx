@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import Loader from "../loader/Loader";
 import Warnings from "../warnings/Warnings";
+import ErrorComponent from "../errorComponent/ErrorComponent";
 
 const Drivers = () => {
   const { token } = useContext(AuthContext) as AuthContextType;
@@ -23,7 +24,9 @@ const Drivers = () => {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {error ? (
-        "Error"
+        <div className="col-span-full">
+          <ErrorComponent />
+        </div>
       ) : isLoading ? (
         <Loader />
       ) : data.length ? (
