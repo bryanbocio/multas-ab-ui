@@ -1,11 +1,11 @@
 const ErrorComponent = () => {
   return (
-    <div className="bg-rose-500 w-full p-5 rounded-lg  flex-col flex justify-center gap-3 items-center">
-      <span className="text-white font-semibold text-xl self-center ">
+    <div className="flex flex-col items-center justify-center w-full md:w-[50%] gap-3 p-6 mx-auto rounded-lg bg-rose-500">
+      <span className="self-center text-xl font-semibold text-white ">
         Algo salio mal :(
       </span>
       <button
-        className="bg-white p-2 rounded-lg font-semibold text-black"
+        className="p-2 font-semibold text-black bg-white rounded-lg"
         onClick={async () => {
           window.location.reload();
         }}
