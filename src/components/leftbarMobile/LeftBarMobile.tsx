@@ -49,6 +49,16 @@ const LeftBarMobile: React.FC<Props> = ({ setShowMobile }) => {
             </Link>
           </div>
         )}
+                {role && (
+          <div
+            className="dark:text-[lightgray] hover:bg-gray-200 dark:hover:bg-[#333] p-3 "
+            onClick={() => setShowMobile(false)}
+          >
+            <Link to="/createAgent" className="text-xl font-medium ">
+              Crear Agente
+            </Link>
+          </div>
+        )}
 
         <div
           className="dark:text-[lightgray] hover:bg-gray-200 dark:hover:bg-[#333] p-3 "

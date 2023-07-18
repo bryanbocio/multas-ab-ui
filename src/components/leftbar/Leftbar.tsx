@@ -36,6 +36,14 @@ const Leftbar = () => {
             </Link>
           </div>
         )}
+                {role && (
+          <div className="dark:text-[lightgray] ">
+            <Link to="/createAgent" className="text-lg font-medium ">
+              Crear Agente
+            </Link>
+          </div>
+        )}
+       
         <div className="dark:text-[lightgray] ">
           <Link to="/home" className="text-lg font-medium ">
             Multas Registradas
