@@ -76,7 +76,7 @@ const Navbar = () => {
 
       <div className="items-center hidden gap-5 md:flex relative">
         <div className="relative cursor-pointer">
-          {basketCount !== 0 && (
+          {basketCount > 0 && (
             <span className="absolute -top-0 right-0 bg-rose-500 rounded-full h-4 w-4 p-1 text-xs text-white flex items-center justify-center">
               {basketCount}
             </span>
