@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import BasketItem from "../../components/basketItem/BasketItem";
+import ErrorComponent from "../../components/errorComponent/ErrorComponent";
 
 const Basket = () => {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
@@ -21,19 +22,22 @@ const Basket = () => {
   return (
     <div className="container relative flex flex-col gap-5 mx-auto md:flex-row lg:gap-10 md:items-start">
       <div className="flex-2 bg-white dark:bg-[#444] p-3 rounded-lg dark:text-[lightgray] text-black flex flex-col gap-6 justify-center">
-        {error?"Error":
-        isLoading
-          ? "Loading..."
-          : data.length
-          ? data.map((e: any) => (
-              <BasketItem
-                key={e.id}
-                trafficFines={e}
-                setTotal={setTotal}
-                total={total}
-              />
-            ))
-          : "No tienes multas agregar al carrito aun"}
+        {error ? (
+          <ErrorComponent />
+        ) : isLoading ? (
+          "Loading..."
+        ) : data.length ? (
+          data.map((e: any) => (
+            <BasketItem
+              key={e.id}
+              trafficFines={e}
+              setTotal={setTotal}
+              total={total}
+            />
+          ))
+        ) : (
+          "No tienes multas agregar al carrito aun"
+        )}
       </div>
       <div className=" hidden sticky top-0 flex-1 bg-white dark:bg-[#444] p-4  rounded-lg flex-col md:flex gap-5 shadow-md">
         <h2 className="text-xl  lg:text-2xl font-semibold text-black dark:text-[lightgray]">

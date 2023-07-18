@@ -1,32 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/authContext";
+import { AuthContextType } from "../../context/AuthContextType";
 
 const Weather = () => {
   const [data, setData] = useState<any>();
+  const { location } = useContext(AuthContext) as AuthContextType;
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        async function (position) {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          setLoading(true);
-          await axios
-            .get(
-              `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&units=metric&appid=68e058a125057ab9646f38c8e5f07a09`
-            )
-            .then((results) => setData(results.data))
-            .catch((err) => console.log(err));
-          setLoading(false);
-        },
-        function (error) {
-          console.error("Error al obtener la ubicación:", error);
-        }
-      );
-    } else {
-      console.error("Geolocalización no está disponible en este navegador");
-    }
+    setLoading(true);
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&lang=es&units=metric&appid=68e058a125057ab9646f38c8e5f07a09`
+      )
+      .then((results) => setData(results.data))
+      .catch((err) => console.log(err));
+    setLoading(false);
   }, []);
   return (
     <div className="flex flex-wrap items-center justify-center gap-5 md:gap-9 lg:gap-12">

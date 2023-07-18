@@ -5,7 +5,7 @@ interface Props{
 }
 
 const Warnings:React.FC<Props> = ({msg}) => {
-  return         <div className="col-span-full mx-auto font-medium text-lg md:text-xl ">{msg}</div>
+  return         <div className="col-span-full mx-auto font-medium text-lg md:text-xl dark:text-[whitesmoke]">{msg}</div>
   ;
 };
 

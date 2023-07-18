@@ -6,4 +6,5 @@ export interface AuthContextType {
   token: string;
   currentUser: TokenType;
   logout: () => void;
+  location: { lat?: string; lon?: string };
 }

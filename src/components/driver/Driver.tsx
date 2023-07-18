@@ -12,6 +12,7 @@ const Driver: React.FC<Props> = ({ driver }) => {
       </h2>
 
       <span className="text-xl font-">{driver.phoneNumber}</span>
+      <span className="text-xl font-">{driver.driverIdentity}</span>
     </div>
   );
 };

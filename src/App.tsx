@@ -21,6 +21,7 @@ import CheckDriver from "./pages/checkDriver/CheckDriver";
 import TrafficFineDetails from "./pages/trafficFineDetails/TrafficFineDetails";
 import Basket from "./pages/basket/Basket";
 import { hasMultipleRoles } from "./utils/Roles";
+import CreateAgent from "./pages/createAgent/CreateAgent";
 function App() {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -94,6 +95,14 @@ function App() {
           element: (
             <Private>
               <ApplyTrafficFine />
+            </Private>
+          ),
+        },
+        {
+          path: "/createAgent",
+          element: (
+            <Private>
+              <CreateAgent />
             </Private>
           ),
         },
