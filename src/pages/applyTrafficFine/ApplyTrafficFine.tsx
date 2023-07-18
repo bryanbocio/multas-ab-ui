@@ -8,7 +8,10 @@ import { AuthContextType } from "../../context/AuthContextType";
 
 const ApplyTrafficFine = () => {
   const queryClient = useQueryClient();
-  const { token, currentUser } = useContext(AuthContext) as AuthContextType;
+  const { token, currentUser, location } = useContext(
+    AuthContext
+  ) as AuthContextType;
+  console.log(location && location.lon);
   const navigate = useNavigate();
   const [input, setInputs] = useState<TrafficFine>({
     driverIdentity: "",
@@ -17,8 +20,8 @@ const ApplyTrafficFine = () => {
     carPlate: "",
     reason: "",
     comment: "",
-    latitude: "",
-    longitude: "",
+    latitude: location.lat || "",
+    longitude: location.lon || "",
     dateCreated: new Date(),
     agentIdentity: currentUser.given_name,
   });
@@ -59,6 +62,9 @@ const ApplyTrafficFine = () => {
     if (!input.longitude.trim()) {
       newErrors.longitude = "Por favor, ingresa una longitud";
     }
+    if (!input.agentIdentity.trim()) {
+      newErrors.agentIdentity = "Por favor, ingresa la cedula del agente";
+    }
     //setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0; // Retorna true si no hay errores
@@ -92,7 +98,7 @@ const ApplyTrafficFine = () => {
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(input)
+    console.log(input);
     try {
       const isValid = validateInputs();
       if (isValid) {
@@ -170,14 +176,18 @@ const ApplyTrafficFine = () => {
               onChange={handleChange}
               type="text"
               name="latitude"
-              className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full"
+              disabled
+              value={input.latitude}
+              className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full cursor-not-allowed"
               placeholder="Latitud"
             />
             <input
               onChange={handleChange}
               type="text"
               name="longitude"
-              className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full"
+              value={input.longitude}
+              disabled
+              className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full cursor-not-allowed"
               placeholder="Longitud"
             />
           </div>
@@ -193,8 +203,7 @@ const ApplyTrafficFine = () => {
             <input
               onChange={handleChange}
               type="text"
-disabled 
-value={input.agentIdentity}
+              value={input.agentIdentity}
               name="agentIdentity"
               className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full text-[gray]"
               placeholder="Identidad del agente"
