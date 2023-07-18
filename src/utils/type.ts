@@ -22,6 +22,16 @@ export interface Basket {
   ];
 }
 
+export interface RegisterAgent {
+  identityUserId: string;
+  email: string;
+  password: string;
+  name: string;
+  lastName: string;
+  phoneNumber: string;
+  role: string;
+}
+
 export interface TokenType {
   email: string;
   given_name: string;
