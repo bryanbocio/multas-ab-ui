@@ -2,11 +2,13 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
+import { AnimateIcon } from "../../utils/animateIcon";
 
 const Weather = () => {
   const [data, setData] = useState<any>();
   const { location } = useContext(AuthContext) as AuthContextType;
   const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -36,7 +38,7 @@ const Weather = () => {
           <div className="boxes  bg-[#F1FFC4] dark:bg-[#f1ffc4a6] dark:text-[whitesmoke]">
             <img
               className=" w-42 h-44 md:w-44 md:h-44 xl:w-52 xl:h-52"
-              src="assets/animated/cloudy-day-1.svg"
+              src={AnimateIcon(data?.weather[0].main)}
               alt=""
             />
             <h1>{data?.name}</h1>
