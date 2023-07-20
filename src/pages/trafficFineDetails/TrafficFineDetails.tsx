@@ -5,6 +5,8 @@ import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import newRequest from "../../Request";
 import { Basket } from "../../utils/type";
+import Loader from "../../components/loader/Loader";
+import ErrorComponent from "../../components/errorComponent/ErrorComponent";
  const TrafficFineDetails = () => {
   const { pathname } = useLocation();
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
@@ -44,17 +46,17 @@ import { Basket } from "../../utils/type";
   return (
     <div className="flex flex-col gap-5  container justify-center items-center max-h-fit">
       {error ? (
-        "Error"
+        <ErrorComponent/>
       ) : isLoading ? (
-        "Loading"
+        <Loader/>
       ) : (
         <>
           <div className="top flex flex-col md:flex-row gap-5 md:gap-10 w-full ">
             <div className="left flex-1 bg-white dark:bg-[#444] rounded-lg shadow-md p-6 flex flex-col gap-2 dark:text-[whitesmoke]">
               <div className="flex items-center">
                 <img
-                  src="https://i.ibb.co/0t7tvpY/conductor-1.png"
-                  className="w-10"
+                  src="https://i.ibb.co/vv57vdt/perfil-del-usuario.png"
+                  className="w-10 md:w-12"
                   alt=""
                 />
                 <h2 className="text-xl mb-2 md:text-2xl font-semibold ">
@@ -81,8 +83,8 @@ import { Basket } from "../../utils/type";
             <div className="right flex-1 bg-white dark:bg-[#444] rounded-lg shadow-md p-6 flex flex-col gap-2 dark:text-[whitesmoke]">
               <div className="flex items-center">
                 <img
-                  src="https://i.ibb.co/tqBmssC/conductor.png"
-                  className="w-10"
+                  src="https://i.ibb.co/bJ0R4RD/policia.png"
+                  className="w-10 md:w-12"
                   alt=""
                 />
                 <h2 className="text-xl mb-2 md:text-2xl font-semibold ">
@@ -110,8 +112,8 @@ import { Basket } from "../../utils/type";
           <div className="bottom bg-white dark:bg-[#444] p-6 rounded-lg w-full shadow-md flex flex-col gap-2 dark:text-[whitesmoke] items-start">
             <div className="flex items-center">
               <img
-                src="https://i.ibb.co/7k7kc4n/multa-por-exceso-de-velocidad-1.png"
-                className="w-10"
+                src="https://i.ibb.co/5GH4cJM/cono-de-trafico.png"
+                className="w-10 md:w-12"
                 alt=""
               />
               <h2 className="text-xl mb-2 md:text-2xl font-semibold ">Multa</h2>
@@ -124,8 +126,8 @@ import { Basket } from "../../utils/type";
               <span className="font-semibold">Razon: </span>
               {data.reason}
             </span>
-            <span className="font-medium text-lg capitalize">
-              <span className="font-semibold">Comentario: </span>
+            <span className="font-medium text-lg capitalize ">
+              <span className="font-semibold ">Comentario: </span>
               {data.comment}
             </span>
             <button
