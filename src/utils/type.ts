@@ -21,7 +21,13 @@ export interface Basket {
     }
   ];
 }
-
+export interface AgentType {
+  id?: number;
+  agentIdentity: string;
+  name: string;
+  lastName: string;
+  phoneNumber: string;
+}
 export interface RegisterAgent {
   identityUserId: string;
   email: string;
