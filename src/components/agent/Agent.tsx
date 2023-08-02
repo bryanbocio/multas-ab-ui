@@ -10,8 +10,8 @@ const Agent:React.FC<Props> = ({agent}) => {
       <h2 className="font-semibold text-xl">
         {agent.name} {agent.lastName}
       </h2>
-
-      <span className="text-xl font-semibold ">{agent.phoneNumber}</span>
+      <span className="text-xl font-normal ">{agent.phoneNumber}</span>
+      <span className="text-xl font-normal ">{agent.agentIdentity}</span>
     </div>
   )
 }
