@@ -125,10 +125,10 @@ const ApplyTrafficFine = () => {
       )}
       <form
         action=""
-        className="flex flex-col justify-center mx-auto w-[80%] md:w-[100%] gap-3 md:gap-5 p-5"
+        className="flex flex-col justify-center mx-auto w-[100%] gap-3 md:gap-5 p-5"
         onSubmit={handleSubmit}
       >
-        <div className="flex flex-col w-full gap-2 md:gap-10 md:flex-row">
+        <div className="flex flex-col w-full gap-2 md:gap-10 md:flex-row">  
           <div className="flex flex-col flex-1 gap-2 md:gap-3 inputs">
             <input
               onChange={handleChange}
