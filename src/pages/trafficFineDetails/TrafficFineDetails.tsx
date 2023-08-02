@@ -7,7 +7,7 @@ import newRequest from "../../Request";
 import { Basket } from "../../utils/type";
 import Loader from "../../components/loader/Loader";
 import ErrorComponent from "../../components/errorComponent/ErrorComponent";
- const TrafficFineDetails = () => {
+const TrafficFineDetails = () => {
   const { pathname } = useLocation();
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const trafficFineId = pathname.split("/")[2];
@@ -30,6 +30,9 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
       queryClient.invalidateQueries(["basketItem"]);
       queryClient.invalidateQueries(["basketItemMobile"]);
     },
+    onError: () => {
+      console.log("error");
+    },
   });
   const AddToCart = () => {
     mutate({
@@ -38,7 +41,7 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
         {
           id: Math.floor(Math.random() * 1000000),
           trafficFineId: data.id,
-          trafficFinePrice: 400,
+          trafficFinePrice: 1,
         },
       ],
     });
@@ -46,9 +49,9 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
   return (
     <div className="flex flex-col gap-5  container justify-center items-center max-h-fit">
       {error ? (
-        <ErrorComponent/>
+        <ErrorComponent />
       ) : isLoading ? (
-        <Loader/>
+        <Loader />
       ) : (
         <>
           <div className="top flex flex-col md:flex-row gap-5 md:gap-10 w-full ">
@@ -124,7 +127,7 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
             </span>
             <span className="font-medium text-lg capitalize">
               <span className="font-semibold">Razon: </span>
-              {data.reason}
+              {data.reason.split(" ").slice(1).join(" ")}
             </span>
             <span className="font-medium text-lg capitalize ">
               <span className="font-semibold ">Comentario: </span>
