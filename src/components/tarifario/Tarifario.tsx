@@ -9,9 +9,14 @@ const Tarifario: React.FC<Props> = ({ multa }) => {
   return (
     <div className="w-full h-[150px]  rounded-lg p-4 border-[1px] border-gray-200 bg-white dark:bg-[#444] flex flex-col gap-2 dark:border-[#444] justify-between">
       <span className="text-lg font-bold dark:text-[whitesmoke]">
-        {multa.reason}
+        {multa.reason.split(" ").slice(1).join(" ")}
       </span>
-      <p className="font-semibold dark:text-[lightgray] truncate ">{multa.comment}</p>
+      <p className="font-semibold dark:text-[lightgray] truncate ">
+        {multa.comment}
+      </p>
+      {/*       <span>
+        {multa.status}
+      </span> */}
       <Link
         to={`/trafficFineDetails/${multa.id}`}
         className="self-end p-2 mt-2 font-medium bg-gray-200 dark:bg-[#333] dark:text-[lightgray] rounded-lg"
