@@ -1,5 +1,5 @@
 # multas-ab-ui
 # Build
-  pnpm i / pnpm install
+  pnpm install
 # start
   pnpm dev
