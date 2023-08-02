@@ -22,7 +22,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
 
   const [ok, setOk] = useState<boolean>(false);
   const login = async (inputs: SignIn): Promise<void> => {
-    axios
+   await axios
       .post("https://localhost:5001/api/Account/login", inputs)
       .then((results) => {
         setToken(results.data.token);
