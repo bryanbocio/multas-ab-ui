@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import newRequest from "../../Request";
+import { useNavigate } from "react-router-dom";
 
 const CreateAgent = () => {
   const { token } = useContext(AuthContext) as AuthContextType;
@@ -16,28 +17,36 @@ const CreateAgent = () => {
     phoneNumber: "",
     role: "AGENT",
   });
+  const navigate = useNavigate();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(input);
   };
   const { mutate, isSuccess, isError } = useMutation({
     mutationFn: (newTodo: RegisterAgent) => {
       return newRequest(token).post("Account/registerbyadmin", newTodo);
     },
   });
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(input);
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/home");
+    }
+  }, [isSuccess]);
   return (
     <div className="container flex justify-center p-2 ">
-
       <form
         action=""
-        onClick={handleSubmit}
+        onSubmit={handleSubmit}
         className="flex flex-col gap-2 md:gap-3 w-full md:w-[40%] inputs"
       >
+        {isError && (
+          <span className="text-rose-500 font-semibold text-lg">Error</span>
+        )}
         <input
           onChange={handleChange}
           type="text"
