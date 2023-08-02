@@ -20,6 +20,16 @@ const Basket = () => {
         .catch((err) => console.log(err));
     },
   });
+
+  /*   const { data: reasonData } = useQuery({
+    queryKey: ["trafficPrices"],
+    queryFn: () => {
+      return newRequest(token)
+        .get("TrafficFine/reasons")
+        .then((results) => results.data)
+        .catch((err) => console.log(err));
+    },
+  }); */
   return (
     <div className="container relative flex flex-col gap-5 mx-auto md:flex-row lg:gap-10 md:items-start">
       <div
