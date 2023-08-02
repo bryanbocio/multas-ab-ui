@@ -5,11 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import axios from "axios";
+import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 const Register = () => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState<SignUp>({});
   const { token } = useContext(AuthContext) as AuthContextType;
-
+  const [registrando, setRegistrando] = useState<boolean>(false);
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -18,12 +19,17 @@ const Register = () => {
     e.preventDefault();
     const { confirmPassword, ...info } = inputs;
     try {
+      setRegistrando(true);
       await axios
         .post("https://localhost:5001/api/Account/register", info)
         .then(() => {
+          setRegistrando(false);
           navigate("/");
         })
-        .catch((err) => console.log(err.response.data.errors));
+        .catch((err) => {
+          console.log(err.response.data.errors);
+          setRegistrando(false);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -97,8 +103,8 @@ const Register = () => {
               placeholder="Confirmar contraseña"
             />
 
-            <button className="p-2 mt-2 text-black transition duration-300 bg-gray-100 rounded-lg hover:bg-white">
-              Registrarme
+            <button className="p-2  h-10 flex items-center justify-center mt-2 text-black transition duration-300 bg-gray-100 rounded-lg hover:bg-white">
+              {registrando ? <ButtonLoader /> : "Registrarme"}
             </button>
             <span className="block mt-auto text-sm text-center text-gray-100 md:hidden">
               ¿Ya tienes cuenta?
