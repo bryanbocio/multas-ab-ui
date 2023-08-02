@@ -23,6 +23,7 @@ import Basket from "./pages/basket/Basket";
 import { hasMultipleRoles } from "./utils/Roles";
 import CreateAgent from "./pages/createAgent/CreateAgent";
 import CheckAgent from "./pages/checkAgent/CheckAgent";
+import CheckOut from "./pages/checkOut/CheckOut";
 function App() {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -118,6 +119,10 @@ function App() {
               <CheckAgent />
             </Private>
           ),
+        },
+        {
+          path: "/checkout",
+          element: <CheckOut />,
         },
         {
           path: "basket",
