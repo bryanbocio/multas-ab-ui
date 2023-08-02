@@ -21,7 +21,9 @@ const Tarifarios = () => {
             ? "TrafficFine"
             : `TrafficFine?IdentityDriver=${currentUser.given_name}`
         )
-        .then((result) => result.data.data)
+        .then((result) =>
+          result.data.data.filter((e: Multas) => e.status == "PENDIENTE")
+        )
         .catch((error) => console.log(error));
     },
   });
