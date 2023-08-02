@@ -33,3 +33,7 @@
 .inputs input {
   @apply dark:bg-[#333] dark:text-[whitesmoke] dark:placeholder-[lightgray];
 }
+
+.cardComponents{
+  @apply bg-gray-100 p-4 h-12  rounded-lg caret-emerald-500 outline-none
+}
