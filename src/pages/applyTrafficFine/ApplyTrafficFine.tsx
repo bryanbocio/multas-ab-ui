@@ -11,7 +11,6 @@ const ApplyTrafficFine = () => {
   const { token, currentUser, location } = useContext(
     AuthContext
   ) as AuthContextType;
-  console.log(location && location.lon);
   const navigate = useNavigate();
   const [input, setInputs] = useState<TrafficFine>({
     driverIdentity: "",
@@ -98,7 +97,6 @@ const ApplyTrafficFine = () => {
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(input);
     try {
       const isValid = validateInputs();
       if (isValid) {
