@@ -133,12 +133,16 @@ const TrafficFineDetails = () => {
               <span className="font-semibold ">Comentario: </span>
               {data.comment}
             </span>
-            <button
+
+            {
+              data.status === "PENDIENTE"  &&
+              <button
               onClick={AddToCart}
               className="bg-emerald-500 dark:bg-emerald-600  p-2 font-semibold text-white dark:text-[whitesmoke] rounded-lg"
-            >
+              >
               Pagar luego
             </button>
+            }
           </div>
         </>
       )}
