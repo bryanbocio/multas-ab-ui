@@ -15,6 +15,11 @@ const Leftbar = () => {
             Tarifario multas
           </Link>
         </div>
+        <div className="dark:text-[lightgray] ">
+          <Link to="/record" className="text-lg font-medium ">
+            Historico de multas
+          </Link>
+        </div>
         {role && (
           <div className="dark:text-[lightgray] ">
             <Link to="/agents" className="text-lg font-medium ">
@@ -36,7 +41,7 @@ const Leftbar = () => {
             </Link>
           </div>
         )}
-                {role && (
+        {role && (
           <div className="dark:text-[lightgray] ">
             <Link to="/createAgent" className="text-lg font-medium ">
               Crear Agente
@@ -46,11 +51,6 @@ const Leftbar = () => {
         <div className="dark:text-[lightgray] ">
           <Link to="/map" className="text-lg font-medium ">
             Mapa de Multas
-          </Link>
-        </div>
-        <div className="dark:text-[lightgray] ">
-          <Link to="/home" className="text-lg font-medium ">
-            Noticias
           </Link>
         </div>
         <div className="dark:text-[lightgray] ">
