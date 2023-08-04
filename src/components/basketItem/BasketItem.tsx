@@ -21,7 +21,7 @@ const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
         .catch((err) => console.log(err));
     },
   });
-  const { data: reasonData } = useQuery({
+  const { data: reasonData, isLoading: loadingReason } = useQuery({
     queryKey: ["reasonsPrice"],
     queryFn: () => {
       return newRequest(token)
@@ -32,7 +32,8 @@ const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
   });
 
   useEffect(() => {
-    data &&
+    !isLoading &&
+      !loadingReason &&
       setTotal(
         data
           .filter((e: any) => e.id == trafficFines.trafficFineId)
