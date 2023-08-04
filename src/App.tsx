@@ -24,6 +24,7 @@ import { hasMultipleRoles } from "./utils/Roles";
 import CreateAgent from "./pages/createAgent/CreateAgent";
 import CheckAgent from "./pages/checkAgent/CheckAgent";
 import CheckOut from "./pages/checkOut/CheckOut";
+import PaymentSuccess from "./pages/paymentSuccess/PaymentSuccess";
 function App() {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -121,12 +122,16 @@ function App() {
           ),
         },
         {
-          path: "/checkout",
+          path: "/checkout/:clientSecret",
           element: <CheckOut />,
         },
         {
-          path: "basket",
+          path: "/basket",
           element: <Basket />,
+        },
+        {
+          path: "/paymentSuccees",
+          element: <PaymentSuccess />,
         },
       ],
     },
