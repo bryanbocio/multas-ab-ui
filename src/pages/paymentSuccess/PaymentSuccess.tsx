@@ -10,8 +10,8 @@ const PaymentSuccess = () => {
   const navigate = useNavigate();
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const { mutate } = useMutation({
-    mutationFn: () => {
-      return newRequest(token).delete(`Basket?id=${currentUser.given_name}`);
+    mutationFn: (params: { basketId: string; driverIdentity: string }) => {
+      return newRequest(token).post("Order", params);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["basketItem"]),
@@ -20,7 +20,10 @@ const PaymentSuccess = () => {
   });
 
   useEffect(() => {
-    mutate();
+    mutate({
+      basketId: currentUser.given_name,
+      driverIdentity: currentUser.given_name,
+    });
   }, []);
   return (
     <div className="container mx-auto">
