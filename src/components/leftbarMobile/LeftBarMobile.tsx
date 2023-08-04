@@ -51,7 +51,7 @@ const LeftBarMobile: React.FC<Props> = ({ setShowMobile }) => {
             </Link>
           </div>
         )}
-                {role && (
+        {role && (
           <div
             className="dark:text-[lightgray] hover:bg-gray-200 dark:hover:bg-[#333] p-3 "
             onClick={() => setShowMobile(false)}
@@ -68,14 +68,6 @@ const LeftBarMobile: React.FC<Props> = ({ setShowMobile }) => {
         >
           <Link to="/map" className="text-xl font-medium ">
             Mapa de Multas
-          </Link>
-        </div>
-        <div
-          className="dark:text-[lightgray] hover:bg-gray-200 dark:hover:bg-[#333] p-3 "
-          onClick={() => setShowMobile(false)}
-        >
-          <Link to="/home" className="text-xl font-medium ">
-            Noticias
           </Link>
         </div>
         <div
