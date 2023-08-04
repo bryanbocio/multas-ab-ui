@@ -8,11 +8,11 @@ interface Props {
 const Tarifario: React.FC<Props> = ({ multa }) => {
   return (
     <div className="w-full h-[150px]  rounded-lg p-4 border-[1px] border-gray-200 bg-white dark:bg-[#444] flex flex-col gap-2 dark:border-[#444] justify-between">
-      <span className="text-lg font-bold dark:text-[whitesmoke]">
+      <span className="text-lg font-bold dark:text-[whitesmoke] truncate">
         {multa.reason.split(" ").slice(1).join(" ")}
       </span>
       <p className="font-semibold dark:text-[lightgray] truncate ">
-        {multa.comment}
+        {multa.comment} 
       </p>
       {/*       <span>
         {multa.status}
