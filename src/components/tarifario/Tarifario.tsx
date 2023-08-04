@@ -12,17 +12,25 @@ const Tarifario: React.FC<Props> = ({ multa }) => {
         {multa.reason.split(" ").slice(1).join(" ")}
       </span>
       <p className="font-semibold dark:text-[lightgray] truncate ">
-        {multa.comment} 
+        {multa.comment}
       </p>
-      {/*       <span>
-        {multa.status}
-      </span> */}
-      <Link
-        to={`/trafficFineDetails/${multa.id}`}
-        className="self-end p-2 mt-2 font-medium bg-gray-200 dark:bg-[#333] dark:text-[lightgray] rounded-lg"
-      >
-        Ver mas
-      </Link>
+
+      <div className="flex flex-row-reverse justify-between">
+        <Link
+          to={`/trafficFineDetails/${multa.id}`}
+          className=" p-2 mt-2 font-medium bg-gray-200 dark:bg-[#333] dark:text-[lightgray] rounded-lg"
+        >
+          Ver mas
+        </Link>
+
+        <span
+          className={`self-end p-2 mt-2  ${
+            multa.status === "PAGADO" ? "text-emerald-500/90" : "text-rose-500"
+          } font-semibold`}
+        >
+          {multa.status === "PAGADO" ? "Pagada" : "Pendiente"}
+        </span>
+      </div>
     </div>
   );
 };
