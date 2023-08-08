@@ -31,11 +31,7 @@ const Basket = () => {
         .catch((err) => console.log(err));
     },
   }); */
-  const {
-    mutate,
-    data: paymentData,
-    isLoading: paymentLoading,
-  } = useMutation({
+  const { mutate, data: paymentData } = useMutation({
     mutationFn: () => {
       return newRequest(token).post(`Payments/${data.id}`);
     },
@@ -43,6 +39,16 @@ const Basket = () => {
   const createPaymentIntent = () => {
     mutate();
   };
+  useEffect(() => {
+    !isLoading &&
+      setTotal(
+        data.items.reduce(
+          (accumulator: any, price: any) =>
+            accumulator + price.trafficFinePrice,
+          0
+        )
+      );
+  }, [data]);
   useEffect(() => {
     paymentData && navigate(`/checkout/${paymentData.data.clientSecret}`);
   }, [paymentData]);
@@ -75,7 +81,7 @@ const Basket = () => {
           Multas por pagar
         </h2>
         <span className="text-xl lg:text-2xl font-semibold dark:text-[lightgray] ">
-          Total {total !== 0 && `RD$${total}`}
+          Total {total !== 0 && `RD$${total.toLocaleString('en-US')}`}
         </span>
         <button
           className="p-1 text-lg font-semibold text-white rounded-md bg-emerald-500/90"
