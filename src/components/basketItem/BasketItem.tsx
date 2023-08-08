@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import newRequest from "../../Request";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
@@ -10,7 +10,7 @@ interface Props {
   setTotal: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
+const BasketItem: React.FC<Props> = ({ trafficFines }) => {
   const { token } = useContext(AuthContext) as AuthContextType;
   const { data, isLoading, error } = useQuery({
     queryKey: ["basketTrafficFines"],
@@ -31,19 +31,6 @@ const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
     },
   });
 
-  useEffect(() => {
-    !isLoading &&
-      !loadingReason &&
-      setTotal(
-        data
-          .filter((e: any) => e.id == trafficFines.trafficFineId)
-          .map((e: any) =>
-            reasonData
-              .filter((reason: any) => reason.reason == e.reason)
-              .map((obj: any) => obj.price)
-          )
-      );
-  }, [data]);
   return (
     <div>
       {error
