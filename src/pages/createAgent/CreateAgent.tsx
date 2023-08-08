@@ -5,9 +5,11 @@ import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import newRequest from "../../Request";
 import { useNavigate } from "react-router-dom";
+import { hasMultipleRoles } from "../../utils/Roles";
 
 const CreateAgent = () => {
-  const { token } = useContext(AuthContext) as AuthContextType;
+  const { token,currentUser } = useContext(AuthContext) as AuthContextType;
+  const role = hasMultipleRoles(currentUser.role);
   const [input, setInput] = useState<RegisterAgent>({
     identityUserId: "",
     email: "",
@@ -33,6 +35,9 @@ const CreateAgent = () => {
   };
 
   useEffect(() => {
+    if(role != "ADMIN"){
+      navigate('/home')
+    }
     if (isSuccess) {
       navigate("/home");
     }
