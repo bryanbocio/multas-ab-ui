@@ -52,7 +52,10 @@ function App() {
   };
 
   const Private = ({ children }: { children: JSX.Element }) => {
-    if (!hasMultipleRoles(currentUser.role)) return <Navigate to="/home" />;
+    const role = hasMultipleRoles(currentUser.role);
+    if (role === "USER   ") {
+      return <Navigate to="/home" />;
+    }
 
     return children;
   };
@@ -89,9 +92,7 @@ function App() {
         {
           path: "/drivers",
           element: (
-            <Private>
               <CheckDriver />
-            </Private>
           ),
         },
         {
@@ -104,11 +105,7 @@ function App() {
         },
         {
           path: "/createAgent",
-          element: (
-            <Private>
-              <CreateAgent />
-            </Private>
-          ),
+          element: <CreateAgent />,
         },
         {
           path: "trafficFineDetails/:id",
@@ -116,11 +113,7 @@ function App() {
         },
         {
           path: "/agents",
-          element: (
-            <Private>
-              <CheckAgent />
-            </Private>
-          ),
+          element: <CheckAgent />,
         },
         {
           path: "/checkout/:clientSecret",
