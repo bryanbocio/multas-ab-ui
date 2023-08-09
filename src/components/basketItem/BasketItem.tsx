@@ -54,7 +54,8 @@ const BasketItem: React.FC<Props> = ({ trafficFines }) => {
                       {reasonData &&
                         reasonData
                           .filter((reason: any) => reason.reason == e.reason)
-                          .map((obj: any) => obj.price)}
+                          .map((obj: any) => obj.price)
+                          .toLocaleString("en-US")}
                     </span>
                   </div>
                 </div>
