@@ -24,7 +24,7 @@ const Index = () => {
           <Link to="/home">multasab</Link>
         </div>
 
-        <ul className="flex items-center gap-5">
+        <ul className="flex items-center gap-5 dark:text-[lightgray]">
           <li>
             <a href="#inicio">Inicio</a>
           </li>
