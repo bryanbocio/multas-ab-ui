@@ -1,11 +1,22 @@
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
+import { AuthContextType } from "../../context/AuthContextType";
 
 const Index = () => {
+  const { token } = useContext(AuthContext) as AuthContextType;
+  const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    alert("Enviado con exito")
+    alert("Enviado con exito");
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/home");
+    }
+  }, []);
   return (
     <div>
       <nav className="sticky top-0 w-full py-5 px-8 bg-white dark:bg-[#333]  flex justify-between z-50">
