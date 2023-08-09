@@ -26,6 +26,7 @@ import CheckAgent from "./pages/checkAgent/CheckAgent";
 import CheckOut from "./pages/checkOut/CheckOut";
 import PaymentSuccess from "./pages/paymentSuccess/PaymentSuccess";
 import Record from "./pages/record/Record";
+import Index from "./pages/index/Index";
 function App() {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -62,7 +63,11 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path:'/',
+      element:<Index/>
+    },
+    {
+      path: "/login",
       element: <Login />,
     },
     {
