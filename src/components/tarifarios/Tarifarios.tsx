@@ -17,7 +17,7 @@ const Tarifarios = () => {
     queryFn: () => {
       return newRequest(token)
         .get(
-          role
+          role !== "USER"
             ? "TrafficFine"
             : `TrafficFine?IdentityDriver=${currentUser.given_name}`
         )
