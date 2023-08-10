@@ -26,12 +26,13 @@ const Map = () => {
       {error ? (
         "error"
       ) : isLoaded ? (
+        !isLoading &&
         <GoogleMap
           zoom={8}
           center={center}
           mapContainerClassName="h-[600px] md:h-full w-full rounded-lg"
         >
-          {!isLoading &&
+          {
             data.map((e: TrafficFine) => (
               <Marker
                 key={e.id}
