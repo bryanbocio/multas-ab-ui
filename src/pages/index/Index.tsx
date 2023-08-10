@@ -23,7 +23,7 @@ const Index = () => {
         <div className="text-4xl font-semibold text-transparent uppercase bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
           <Link to="/home">multasab</Link>
         </div>
-
+        <Link to="/login" className="flex items-center  md:hidden dark:text-[lightgray]">Iniciar Sesion</Link>
         <ul className=" items-center gap-5 dark:text-[lightgray] hidden md:flex">
           <li>
             <a href="#inicio">Inicio</a>
@@ -566,7 +566,7 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="py-5 bg-gray-100 dark:bg-[#333] ">
+      <footer className="py-5 bg-gray-100 dark:bg-[#333] px-5 lg:px-0 ">
         <div className="container mx-auto">
           <div className="flex flex-col items-center justify-between gap-2 md:gap-0 md:flex-row">
             <div className="font-light copyright dark:text-[lightgray]">
