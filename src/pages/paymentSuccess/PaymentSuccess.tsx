@@ -1,37 +1,55 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useContext, useEffect, useState } from "react";
+import newRequest from "../../Request";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
-import newRequest from "../../Request";
 import Invoice from "../../components/invoice/Invoice";
+import { useNavigate } from "react-router-dom";
 
+interface Order {
+  basketId: string;
+  driverIdentity: string;
+}
 const PaymentSuccess = () => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
-  const { mutateAsync, data } = useMutation({
-    mutationFn: (params: { basketId: string; driverIdentity: string }) => {
+  const navigate = useNavigate();
+  const [openInvoice, setOpenInvoice] = useState<boolean>(true);
+  const queryClient = useQueryClient();
+
+  const { data: basketData, isLoading: loadingBasket } = useQuery({
+    queryKey: ["basketItems"],
+    queryFn: () => {
       return newRequest(token)
-        .post("Order", params)
-        .then((result) => {
-          return result.data;
-        })
+        .get(`Basket?id=${currentUser.given_name}`)
+        .then((results) => results.data)
         .catch((err) => console.log(err));
     },
-    onSuccess: () => {
+  });
+  const { mutateAsync, data } = useMutation({
+    mutationFn: async (newTodo: Order) => {
+      return await newRequest(token)
+        .post("Order", newTodo)
+        .then((result) => result.data)
+        .catch((err) => console.log(err));
+    },
+    onSuccess: (data) => {
       queryClient.invalidateQueries(["basketItem"]),
         queryClient.invalidateQueries(["basketItemMobile"]);
     },
   });
 
   useEffect(() => {
-    const datos = {
-      basketId: currentUser.given_name,
-      driverIdentity: currentUser.given_name,
-    };
-    mutateAsync(datos);
-  }, [currentUser.given_name, mutateAsync]);
+    if (!loadingBasket) {
+      if (basketData.items.length !== 0) {
+        mutateAsync({
+          basketId: currentUser.given_name,
+          driverIdentity: currentUser.given_name,
+        });
+      } else {
+        return;
+      }
+    }
+  }, [loadingBasket]);
 
   return (
     <div className="container mx-auto">
@@ -63,7 +81,10 @@ const PaymentSuccess = () => {
           Volver
         </button>
       </div>
-      {data && <Invoice multa={data} />}
+
+      {data && openInvoice && (
+        <Invoice multa={data} setOpenInvoice={setOpenInvoice} />
+      )}
     </div>
   );
 };
