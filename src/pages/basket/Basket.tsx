@@ -7,6 +7,7 @@ import BasketItem from "../../components/basketItem/BasketItem";
 import ErrorComponent from "../../components/errorComponent/ErrorComponent";
 import Loader from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";
+import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 
 const Basket = () => {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
@@ -22,7 +23,11 @@ const Basket = () => {
     },
   });
 
-  const { mutate, data: paymentData } = useMutation({
+  const {
+    mutate,
+    data: paymentData,
+    isLoading: loadingPayment,
+  } = useMutation({
     mutationFn: () => {
       return newRequest(token).post(`Payments/${data.id}`);
     },
@@ -78,17 +83,20 @@ const Basket = () => {
           className="p-1 text-lg font-semibold text-white rounded-md bg-emerald-500/90"
           onClick={createPaymentIntent}
         >
-          Pagar multas
+          {loadingPayment ? <ButtonLoader /> : "Pagar multas"}
         </button>
       </div>
 
       <div className="block w-full md:hidden">
+        <span className="text-xl lg:text-2xl font-semibold dark:text-[lightgray] ">
+          Total {total !== 0 && `RD$${total.toLocaleString("en-US")}`}
+        </span>
         {!error && (
           <button
             className="w-full p-2 text-lg font-semibold text-white rounded-lg bg-emerald-500/90"
             onClick={createPaymentIntent}
           >
-            Pagar multas
+            {loadingPayment ? <ButtonLoader /> : "Pagar multas"}
           </button>
         )}
       </div>
