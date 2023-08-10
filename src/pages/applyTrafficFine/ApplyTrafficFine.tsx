@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import { format, formatPhoneNumber } from "../../utils/formatIdentityId";
+import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 
 const ApplyTrafficFine = () => {
   const queryClient = useQueryClient();
@@ -109,7 +110,7 @@ const ApplyTrafficFine = () => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const { mutateAsync, isSuccess } = useMutation({
+  const { mutateAsync, isSuccess, isLoading } = useMutation({
     mutationFn: (newTodo: TrafficFine) => {
       return newRequest(token).post("TrafficFine", newTodo);
     },
@@ -234,14 +235,14 @@ const ApplyTrafficFine = () => {
             />
             <button className="hidden w-full p-4 font-medium text-white bg-gray-200 rounded-md md:block border-[1px] border-gray-300 hover:bg-emerald-500/90 transition duration-300 group dark:bg-stone-600">
               <span className="text-base font-semibold text-transparent transition duration-300 lg:text-lg bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text dark:from-emerald-500 dark:via-yellow-500 dark:to-orange-500 group-hover:bg-transparent group-hover:text-white ">
-                Agregar multa
+                {isLoading ? <ButtonLoader /> : "Agregar multa"}
               </span>
             </button>
           </div>
         </div>
         <button className="block w-full p-3 font-medium text-white rounded-md md:hidden border-[1px] border-gray-300 bg-gray-200  hover:bg-emerald-500/90 transition duration-300 group">
           <span className="text-base font-semibold text-transparent transition duration-300 bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text group-hover:bg-transparent group-hover:text-white ">
-            Agregar multa
+            {isLoading ? <ButtonLoader /> : "Agregar multa"}
           </span>
         </button>
       </form>
