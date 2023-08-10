@@ -22,15 +22,6 @@ const Basket = () => {
     },
   });
 
-  /*   const { data: reasonData } = useQuery({
-    queryKey: ["trafficPrices"],
-    queryFn: () => {
-      return newRequest(token)
-        .get("TrafficFine/reasons")
-        .then((results) => results.data)
-        .catch((err) => console.log(err));
-    },
-  }); */
   const { mutate, data: paymentData } = useMutation({
     mutationFn: () => {
       return newRequest(token).post(`Payments/${data.id}`);
@@ -81,7 +72,7 @@ const Basket = () => {
           Multas por pagar
         </h2>
         <span className="text-xl lg:text-2xl font-semibold dark:text-[lightgray] ">
-          Total {total !== 0 && `RD$${total.toLocaleString('en-US')}`}
+          Total {total !== 0 && `RD$${total.toLocaleString("en-US")}`}
         </span>
         <button
           className="p-1 text-lg font-semibold text-white rounded-md bg-emerald-500/90"
