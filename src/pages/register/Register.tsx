@@ -6,11 +6,12 @@ import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import axios from "axios";
 import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
-import { format } from "../../utils/formatIdentityId";
+import { format, formatPhoneNumber } from "../../utils/formatIdentityId";
 
 const Register = () => {
   const navigate = useNavigate();
   const [formattedValue, setFormattedValue] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [inputs, setInputs] = useState<SignUp>({});
   const { token } = useContext(AuthContext) as AuthContextType;
   const [registrando, setRegistrando] = useState<boolean>(false);
@@ -22,12 +23,13 @@ const Register = () => {
     setFormattedValue(formattedInputValue);
     setInputs((prev) => ({
       ...prev,
-      identityUserId: formattedInputValue.replace(/-/g, ''),
+      identityUserId: formattedInputValue.replace(/-/g, ""),
     }));
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { confirmPassword, ...info } = inputs;
+    console.log(inputs);
     try {
       setRegistrando(true);
       await axios
@@ -44,6 +46,18 @@ const Register = () => {
       console.log(error);
     }
   };
+
+  const handleInputChangeNumber = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const formattedValue = formatPhoneNumber(event.target.value);
+    setPhoneNumber(formattedValue);
+    setInputs((prev) => ({
+      ...prev,
+      phoneNumber: event.target.value.replace(/\D/g, ""),
+    }));
+  };
+
   useEffect(() => {
     if (token) {
       navigate("/home");
@@ -94,9 +108,11 @@ const Register = () => {
               placeholder="Apellido"
             />
             <input
-              onChange={handleOnChange}
+              onChange={handleInputChangeNumber}
               type="text"
               name="phoneNumber"
+              value={phoneNumber}
+              maxLength={14}
               className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
               placeholder="Celular"
             />
