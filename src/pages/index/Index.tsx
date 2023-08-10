@@ -19,12 +19,12 @@ const Index = () => {
   }, []);
   return (
     <div>
-      <nav className="sticky top-0 w-full py-5 px-8 bg-white dark:bg-[#333]  flex justify-between z-50">
+      <nav className="sticky top-0 w-full py-5 px-8 bg-white dark:bg-[#333]  flex justify-between z-50 border-b-[1px] dark:border-gray-500">
         <div className="text-4xl font-semibold text-transparent uppercase bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
           <Link to="/home">multasab</Link>
         </div>
 
-        <ul className="flex items-center gap-5 dark:text-[lightgray]">
+        <ul className=" items-center gap-5 dark:text-[lightgray] hidden md:flex">
           <li>
             <a href="#inicio">Inicio</a>
           </li>
@@ -53,10 +53,13 @@ const Index = () => {
         <span className="text-3xl text-white">Un software para el pais</span>
       </section>
 
-      <section id="about" className="h-[350px] bg-gray-100">
+      <section
+        id="about"
+        className="h-auto md:h-[350px] bg-gray-100 dark:bg-[#222] py-10 md:py-0"
+      >
         <div className="container mx-auto">
-          <div className="grid grid-cols-3 gap-10">
-            <div className="flex flex-col items-center justify-center gap-10 p-12 scale-105 rounded-md -mt-28 bg-emerald-500">
+          <div className="grid grid-cols-1 gap-4 md:gap-10 md:grid-cols-3 place-items-center">
+            <div className="flex flex-col items-center justify-center gap-10 p-12 -mt-16 scale-100 w-[410px]  rounded-md md:scale-105 md:-mt-28 bg-emerald-500">
               <h1 className="text-4xl font-semibold text-white">
                 ¿Por que MULTASAB?
               </h1>
@@ -67,14 +70,14 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="flex flex-col w-[410px] h-[300px] p-6 bg-white gap-8 rounded-md items-center -mt-16">
+            <div className="flex flex-col w-[410px] h-[300px] p-6 bg-white dark:bg-[#444] gap-8 rounded-md items-center md:-mt-16 dark:text-[lightgray]">
               <div className="flex flex-col items-center text-green">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-16 h-16"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
-                  stroke="#2c3e50"
+                  stroke="currentColor"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -85,20 +88,20 @@ const Index = () => {
                 </svg>
                 <span className="text-xl font-semibold">Eficiente</span>
               </div>
-              <p className="text-lg text-left text-black">
+              <p className="text-lg text-left text-black dark:text-[lightgray]">
                 El exceso de velocidad no es nada bueno, te pueden multar por
                 imprudencias a altas velocidades.
               </p>
             </div>
 
-            <div className="flex flex-col w-[410px] h-[300px] p-6 bg-white gap-8 rounded-md items-center -mt-16">
+            <div className="flex flex-col w-[410px] h-[300px] p-6 bg-white dark:bg-[#444] gap-8 rounded-md items-center md:-mt-16 dark:text-[lightgray]">
               <div className="flex flex-col items-center text-green">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-16 h-16"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
-                  stroke="#2c3e50"
+                  stroke="currentColor"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -113,7 +116,7 @@ const Index = () => {
                   libre de complejidad
                 </span>
               </div>
-              <p className="text-lg text-left text-black">
+              <p className="text-lg text-left text-black dark:text-[lightgray]">
                 Ir muy rápido al manejar no es bueno. Te pueden poner una multa
                 por ir muy rápido y no es seguro. Mejor es manejar con cuidado y
                 seguir las reglas.
@@ -122,29 +125,36 @@ const Index = () => {
           </div>
         </div>
       </section>
-      <section id="services" className="bg-[#fff9f7] pt-16 pb-32">
+
+      <section
+        id="services"
+        className="bg-[#fff9f7] dark:bg-[#333] pt-16 pb-32"
+      >
         <div className="flex">
-          <div className="w-full h-full blur-md">
+          <div className="hidden w-full h-full blur-md md:block">
             <img
               src="https://i0.wp.com/rnn.com.do/wp-content/uploads/2022/12/Digesett-1140x694-1.webp?fit=1030%2C627&ssl=1"
               alt=""
               className=""
             />
           </div>
+
           <div className="flex flex-col flex-1 w-full gap-8 p-10">
             <div className="flex flex-col gap-1 ">
-              <span className="text-lg text-[gray]">Acerca de</span>
-              <span className="text-3xl font-semibold">Ventajas</span>
+              <span className="text-lg text-[gray] ">Acerca de</span>
+              <span className="text-3xl font-semibold dark:text-[lightgray]">
+                Ventajas
+              </span>
             </div>
 
-            <div className="flex gap-5 w-[600px] items-center">
-              <div className="flex items-center justify-center p-2 border-2 rounded-full border-amber-500">
+            <div className="flex gap-5 w-auto md:w-[600px] items-center">
+              <div className="flex items-center justify-center p-2 border-2 rounded-full border-amber-500 dark:text-[lightgray]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8"
+                  className="w-5 sm:w-8 sm:h-8"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
-                  stroke="#2c3e50"
+                  stroke="currentColor"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -159,8 +169,10 @@ const Index = () => {
               </div>
 
               <div className="flex flex-col">
-                <span className="text-xl font-semibold">Integridad</span>
-                <p className="font-medium">
+                <span className="text-xl font-semibold dark:text-[lightgray]">
+                  Integridad
+                </span>
+                <p className="font-medium dark:text-[lightgray]">
                   Actuamos con honestidad y transparencia en todas nuestras
                   interacciones con conductores, agencias y socios. Mantenemos
                   altos estándares éticos en todo momento.
@@ -168,14 +180,14 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="flex gap-5 w-[600px] items-center">
-              <div className="flex items-center justify-center p-2 border-[2px] rounded-full border-amber-500 ">
+            <div className="flex gap-5 w-auto md:w-[600px] items-center">
+              <div className="flex items-center justify-center p-2 border-[2px] rounded-full border-amber-500 dark:text-[lightgray]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-9 h-9"
+                  className="w-5 sm:w-9 sm:h-8"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
-                  stroke="#2c3e50"
+                  stroke="currentColor"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -195,8 +207,10 @@ const Index = () => {
               </div>
 
               <div className="flex flex-col">
-                <span className="text-xl font-semibold">Innovacion</span>
-                <p className="font-medium">
+                <span className="text-xl font-semibold dark:text-[lightgray]">
+                  Innovacion
+                </span>
+                <p className="font-medium dark:text-[lightgray]">
                   Buscamos constantemente nuevas formas de mejorar y optimizar
                   nuestra aplicación para brindar soluciones más efectivas y
                   prácticas.
@@ -204,14 +218,14 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="flex gap-5 w-[600px] items-center">
-              <div className="flex items-center justify-center p-2  border-[2px] rounded-full border-amber-500 ">
+            <div className="flex gap-5 w-auto md:w-[600px] items-center">
+              <div className="flex items-center justify-center p-2  border-[2px] rounded-full border-amber-500 dark:text-[lightgray]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-9 w-9"
+                  className="w-5 sm:w-8 sm:h-8"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
-                  stroke="#2c3e50"
+                  stroke="currentColor"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -224,10 +238,10 @@ const Index = () => {
               </div>
 
               <div className="flex flex-col">
-                <span className="text-xl font-semibold">
+                <span className="text-xl font-semibold dark:text-[lightgray]">
                   Compromiso con la seguridad vial
                 </span>
-                <p className="font-medium">
+                <p className="font-medium dark:text-[lightgray]">
                   Priorizamos la seguridad vial y nos esforzamos por crear
                   conciencia sobre las normas de tráfico, con el objetivo de
                   reducir accidentes y mejorar la conducta vial.
@@ -237,19 +251,21 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="container mx-auto mt-5">
+        <div className="container px-5 mx-auto mt-5 sm:px-0">
           <div className="flex flex-col items-center justify-center gap-5">
-            <span className="text-4xl font-semibold">Servicios</span>
-            <p className="text-xl">
+            <span className="text-4xl font-semibold dark:text-[lightgray]">
+              Servicios
+            </span>
+            <p className="text-xl dark:text-[lightgray] flex-wrap flex justify-center">
               Dentro de MULTASAB le ofrecemos innumerables servicios, pero
               algunos de los más importantes son los siguientes:
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mt-20">
-            <div className="flex flex-col items-center gap-5 bg-white rounded-md shadow-md">
+          <div className="grid gap-4 mt-20 grid-col-1 md:grid-cols-3">
+            <div className="flex flex-col items-center gap-5 bg-white dark:bg-[#444] rounded-md shadow-md">
               <div className="p-3 -mt-6 rounded-full icon bg-emerald-500">
-                <span>
+                <span className="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-10 h-10"
@@ -268,16 +284,16 @@ const Index = () => {
                 </span>
               </div>
 
-              <h2 className="text-2xl font-medium uppercase">
+              <h2 className="text-2xl font-medium uppercase dark:text-[lightgray]">
                 asistencia vial
               </h2>
-              <p className="px-5 pt-1 pb-4 text-center">
+              <p className="px-5 pt-1 pb-4 text-center dark:text-[lightgray]">
                 La asistencia vial es un servicio crucial que proporciona ayuda
                 a los conductores cuando enfrentan problemas en la carretera.
               </p>
             </div>
 
-            <div className="flex flex-col items-center gap-5 bg-white rounded-md shadow-md">
+            <div className="flex flex-col items-center gap-5 bg-white dark:bg-[#444] rounded-md shadow-md">
               <div className="p-3 -mt-6 rounded-full icon bg-emerald-500">
                 <span>
                   <svg
@@ -299,17 +315,17 @@ const Index = () => {
                 </span>
               </div>
 
-              <h2 className="text-2xl font-medium uppercase">
+              <h2 className="text-2xl font-medium uppercase dark:text-[lightgray]">
                 Pagos de multas online
               </h2>
-              <p className="px-5 pt-1 pb-4 text-center">
+              <p className="px-5 pt-1 pb-4 text-center dark:text-[lightgray]">
                 Pagar multas en línea es una opción conveniente y rápida para
                 saldar sanciones de tráfico. Permite pagar desde casa, evitando
                 desplazamientos.
               </p>
             </div>
 
-            <div className="flex flex-col items-center gap-5 bg-white rounded-md shadow-md">
+            <div className="flex flex-col items-center gap-5 bg-white dark:bg-[#444] rounded-md shadow-md">
               <div className="p-3 -mt-6 rounded-full icon bg-emerald-500">
                 <span>
                   <svg
@@ -331,10 +347,10 @@ const Index = () => {
                 </span>
               </div>
 
-              <h2 className="text-2xl font-medium uppercase">
+              <h2 className="text-2xl font-medium uppercase dark:text-[lightgray]">
                 integridad de sus datos
               </h2>
-              <p className="px-5 pt-1 pb-4 text-center">
+              <p className="px-5 pt-1 pb-4 text-center dark:text-[lightgray]">
                 Pagar multas en línea es rápido y conveniente. Usas sitios web
                 seguros para ingresar los detalles de la multa y hacer el pago
                 electrónico, evitando recargos.
@@ -344,10 +360,10 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 dark:bg-[#222] bg-gray-100 px-5 sm:px-0">
         <div className="container mx-auto">
-          <div className="flex gap-8">
-            <div className="flex-1 bg-[url('https://imagenes.listindiario.com/files/main_image/uploads/2022/04/12/6430cc109ec92.png')] bg-no-repeat h-[450px] flex justify-center items-end rounded-lg px-10 ">
+          <div className="flex flex-col gap-8 md:flex-row">
+            <div className="flex-1 bg-[url('https://imagenes.listindiario.com/files/main_image/uploads/2022/04/12/6430cc109ec92.png')] bg-no-repeat h-[450px] flex justify-center items-center md:items-end rounded-lg px-5  md:px-10 ">
               <div className="flex flex-col items-center gap-2 p-4 mb-3 text-white rounded-lg backdrop-blur-lg">
                 <h2 className="text-2xl font-semibold">Misión</h2>
                 <p className="text-lg">
@@ -363,7 +379,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="flex-1 bg-[url('https://extradigital.com.do/wp-content/uploads/2019/01/DIGESETT-Inicia-Proceso-De-Seleccion-De-Nuevos-Agentes.jpg')] bg-no-repeat h-[450px] flex justify-center items-end rounded-lg px-10">
+            <div className="flex-1 bg-[url('https://extradigital.com.do/wp-content/uploads/2019/01/DIGESETT-Inicia-Proceso-De-Seleccion-De-Nuevos-Agentes.jpg')] bg-no-repeat h-[450px] flex justify-center items-center md:items-end rounded-lg px-5 md:px-10">
               <div className="flex flex-col items-center gap-2 p-4 mb-2 text-white rounded-lg backdrop-blur-lg">
                 <h2 className="text-2xl font-semibold">Visión</h2>
                 <p className="text-lg">
@@ -382,20 +398,22 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="bg-[#fff9f7] py-16">
+      <section className="bg-[#fff9f7] dark:bg-[#333] py-16">
         <div className="container mx-auto">
           {/* Label */}
           <div className="flex flex-col items-center gap-5">
-            <h2 className="text-4xl font-semibold">Equipo</h2>
-            <p className="text-xl">
+            <h2 className="text-4xl font-semibold dark:text-[lightgray]">
+              Equipo
+            </h2>
+            <p className="text-xl dark:text-[lightgray] flex-wrap flex text-center">
               Esta herramienta tecnologica es ideada y desarrollada por este
               gran equipo.
             </p>
           </div>
           {/* Our cards */}
-          <div className="grid grid-cols-3 gap-5 mt-8">
+          <div className="grid grid-cols-1 gap-5 mt-8 md:grid-cols-3 place-items-center">
             {/* Bryan Bocio */}
-            <div className="flex flex-col gap-5 overflow-hidden transform bg-white rounded-md shadow-md hover:-translate-y-5">
+            <div className="flex flex-col gap-5 overflow-hidden transform bg-white rounded-md shadow-md hover:-translate-y-5 dark:bg-[#222] w-[80%] md:w-full">
               <div>
                 <img
                   src="https://i.ibb.co/PTFnwNw/Whats-App-Image-2023-03-27-at-7-27-42-PM.jpg"
@@ -405,12 +423,17 @@ const Index = () => {
               </div>
 
               <div className="flex flex-col items-center gap-2 py-6">
-                <span className="text-2xl"> Bryan Bocio</span>
-                <span className="text-[gray]">Desarrollador Backend</span>
+                <span className="text-2xl dark:text-[lightgray]">
+                  {" "}
+                  Bryan Bocio
+                </span>
+                <span className="text-[gray] dark:text-[lightgray]">
+                  Desarrollador Backend
+                </span>
               </div>
             </div>
             {/* Albert Joan */}
-            <div className="flex flex-col gap-5 overflow-hidden bg-white rounded-md shadow-md hover:-translate-y-5">
+            <div className="flex flex-col gap-5 overflow-hidden bg-white rounded-md shadow-md hover:-translate-y-5 dark:bg-[#222]  w-[80%] md:w-full">
               <div>
                 <img
                   src="https://i.ibb.co/rxDNN3X/20221026-181833.jpg"
@@ -420,12 +443,17 @@ const Index = () => {
               </div>
 
               <div className="flex flex-col items-center gap-2 py-6">
-                <span className="text-2xl"> Albert Agramonte</span>
-                <span className="text-[gray]">Desarrollador Frontend</span>
+                <span className="text-2xl dark:text-[lightgray]">
+                  {" "}
+                  Albert Agramonte
+                </span>
+                <span className="text-[gray] dark:text-[lightgray]">
+                  Desarrollador Frontend
+                </span>
               </div>
             </div>
             {/* Joan Estiven */}
-            <div className="flex flex-col gap-5 overflow-hidden bg-white rounded-md shadow-md hover:-translate-y-5">
+            <div className="flex flex-col gap-5 overflow-hidden bg-white rounded-md shadow-md hover:-translate-y-5 dark:bg-[#222]  w-[80%] md:w-full">
               <div>
                 <img
                   src="https://i.ibb.co/3hKNT6N/Whats-App-Image-2023-08-09-at-1-44-43-PM.jpg"
@@ -435,18 +463,24 @@ const Index = () => {
               </div>
 
               <div className="flex flex-col items-center gap-2 py-6">
-                <span className="text-2xl">Joan Cuevas</span>
-                <span className="text-[gray]">Desarrollador Frontend</span>
+                <span className="text-2xl dark:text-[lightgray]">
+                  Joan Cuevas
+                </span>
+                <span className="text-[gray] dark:text-[lightgray]">
+                  Desarrollador Frontend
+                </span>
               </div>
             </div>
           </div>
 
           {/* preguntas frecuentes */}
-          <div className="flex flex-col mt-28">
+          <div className="flex flex-col px-5 mt-28">
             {/* Label */}
             <div className="flex flex-col items-center gap-5">
-              <h2 className="text-4xl font-semibold">F.A.Q</h2>
-              <span className="text-xl">
+              <h2 className="text-4xl font-semibold dark:text-[lightgray]">
+                F.A.Q
+              </h2>
+              <span className="text-xl dark:text-[lightgray]">
                 Nuestra área de preguntas frecuentes donde podrá encontrar
                 respuestas a sus dudas más comunes.
               </span>
@@ -456,13 +490,13 @@ const Index = () => {
               {/* Question 1*/}
               <div className="flex flex-col ">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-gray-800 rounded-full"></span>
+                  <span className="w-2 h-2 bg-gray-800 rounded-full dark:bg-gray-300"></span>
 
                   <span className="text-lg text-emerald-500">
                     ¿Como puedo registrarme?
                   </span>
                 </div>
-                <span className="flex gap-1">
+                <span className="flex gap-1 dark:text-[lightgray]">
                   Solo necesitas poner tus datos en este link de
                   <Link to="register" className="text-blue-400 underline">
                     aqui
@@ -472,13 +506,13 @@ const Index = () => {
               {/* Question 2*/}
               <div className="flex flex-col ">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-gray-800 rounded-full"></span>
+                  <span className="w-2 h-2 bg-gray-800 rounded-full dark:bg-gray-300"></span>
 
                   <span className="text-lg text-emerald-500">
                     ¿Podre pagar mis multas dentro del sistema?
                   </span>
                 </div>
-                <span className="flex gap-1">
+                <span className="flex gap-1 dark:text-[lightgray]">
                   Claro que podra, esta enfocada para eso.
                 </span>
               </div>
@@ -487,31 +521,33 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="contact" className="py-16 bg-gray-100">
+      <section id="contact" className="py-16 bg-gray-100 dark:bg-[#222]">
         <div className="container flex flex-col items-center justify-center gap-10 mx-auto">
-          <h1 className="text-4xl font-semibold">Comunicate con nosotros</h1>
-          <div className="p-10 bg-white rounded-md">
+          <h1 className="text-3xl  md:text-4xl font-semibold dark:text-[lightgray]">
+            Comunicate con nosotros
+          </h1>
+          <div className="p-10 bg-white dark:bg-[#444] rounded-md w-[90%] md:w-auto overflow-hidden">
             <form
               action=""
               className="flex flex-col gap-7"
               onSubmit={handleSubmit}
             >
-              <div className="flex gap-5">
+              <div className="flex flex-col gap-5 md:flex-row">
                 <input
                   type="text"
-                  className="p-3  outline-none caret-emerald-500 border-[1px] border-gray-200 rounded-md"
+                  className="p-3  outline-none caret-emerald-500 border-[1px] border-gray-200 rounded-md bg-transparent dark:placeholder-gray-300 dark:text-[lightgray]"
                   placeholder="Nombre"
                 />
                 <input
                   type="email"
-                  className="p-3 outline-none caret-emerald-500 border-[1px] border-gray-200 rounded-md"
+                  className="p-3 outline-none caret-emerald-500 border-[1px] border-gray-200 rounded-md bg-transparent dark:placeholder-gray-300 dark:text-[lightgray]"
                   placeholder="Correo"
                 />
               </div>
 
               <input
                 type="text"
-                className="p-3  outline-none caret-emerald-500 border-[1px] border-gray-200 rounded-md"
+                className="p-3  outline-none caret-emerald-500 border-[1px] border-gray-200 rounded-md bg-transparent dark:placeholder-gray-300 dark:text-[lightgray]"
                 placeholder="Titulo"
               />
               <textarea
@@ -519,11 +555,10 @@ const Index = () => {
                 id=""
                 cols={30}
                 rows={10}
-                className="p-3 outline-none caret-emerald-500 border-[1px] border-gray-200 rounded-md"
+                className="p-3 outline-none caret-emerald-500 border-[1px] border-gray-200 rounded-md bg-transparent dark:placeholder-gray-300 dark:text-[lightgray]"
                 placeholder="Mensaje"
               />
               <button className="self-center p-3 font-semibold text-white rounded-md w-28 bg-emerald-500">
-                {" "}
                 Enviar
               </button>
             </form>
@@ -531,11 +566,11 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="py-5">
+      <footer className="py-5 bg-gray-100 dark:bg-[#333] ">
         <div className="container mx-auto">
-          <div className="flex justify-between">
-            <div className="font-light copyright">
-              &copy; Copyright{" "}
+          <div className="flex flex-col items-center justify-between gap-2 md:gap-0 md:flex-row">
+            <div className="font-light copyright dark:text-[lightgray]">
+              &copy; Copyright
               <span className="font-bold text-transparent bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
                 MULTASAB
               </span>
