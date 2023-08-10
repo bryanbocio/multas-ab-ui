@@ -11,7 +11,7 @@ const Driver: React.FC<Props> = ({ driver }) => {
         {driver.name} {driver.lastName}
       </h2>
 
-      <span className="text-xl font-">{driver.phoneNumber}</span>
+      <span className="text-xl font-">{driver.phoneNumber.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</span>
       <span className="text-xl font-">
         {driver.driverIdentity.replace(/(\d{3})(\d{7})(\d{1})/, "$1-$2-$3")}
       </span>
