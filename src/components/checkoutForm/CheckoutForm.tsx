@@ -36,7 +36,7 @@ const CheckoutForm = () => {
     }
   };
   return (
-    <div className="w-1/2 mx-auto">
+    <div className="w-[90%] md:w-1/2 mx-auto">
       <form action="" onSubmit={handleSubmit} className="flex flex-col gap-5 ">
         <PaymentElement />
         <button disabled={!stripe} className="p-2 text-white rounded-lg bg-emerald-500/90">Submit</button>
