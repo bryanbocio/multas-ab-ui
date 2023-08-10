@@ -21,6 +21,7 @@ const CheckoutForm = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
+        
         return_url: "http://localhost:5173/paymentSuccees",
       },
     });
@@ -36,9 +37,9 @@ const CheckoutForm = () => {
   };
   return (
     <div className="w-1/2 mx-auto">
-      <form action="" onSubmit={handleSubmit} className=" flex flex-col gap-5">
+      <form action="" onSubmit={handleSubmit} className="flex flex-col gap-5 ">
         <PaymentElement />
-        <button disabled={!stripe} className="bg-emerald-500/90 p-2 text-white rounded-lg">Submit</button>
+        <button disabled={!stripe} className="p-2 text-white rounded-lg bg-emerald-500/90">Submit</button>
       </form>
     </div>
   );
