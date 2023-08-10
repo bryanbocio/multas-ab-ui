@@ -65,14 +65,14 @@ const TrafficFineDetails = () => {
       );
   }, [data]);
   return (
-    <div className="flex flex-col gap-5  container justify-center items-center max-h-fit">
+    <div className="container flex flex-col items-center justify-center gap-5 max-h-fit">
       {error ? (
         <ErrorComponent />
       ) : isLoading ? (
         <Loader />
       ) : (
         <>
-          <div className="top flex flex-col md:flex-row gap-5 md:gap-10 w-full ">
+          <div className="flex flex-col w-full gap-5 top md:flex-row md:gap-10 ">
             <div className="left flex-1 bg-white dark:bg-[#444] rounded-lg shadow-md p-6 flex flex-col gap-2 dark:text-[whitesmoke]">
               <div className="flex items-center">
                 <img
@@ -80,23 +80,26 @@ const TrafficFineDetails = () => {
                   className="w-10 md:w-12"
                   alt=""
                 />
-                <h2 className="text-xl mb-2 md:text-2xl font-semibold ">
+                <h2 className="mb-2 text-xl font-semibold md:text-2xl ">
                   Conductor
                 </h2>
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Nombre: </span>
                 {data.driver.name}
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Apellido: </span>
                 {data.driver.lastName}
               </div>
-              <div className="font-medium text-lg ">
+              <div className="text-lg font-medium ">
                 <span className="font-semibold">Cedula: </span>
-                {data.driver.driverId}
+                {data.driver.driverId.replace(
+                  /(\d{3})(\d{7})(\d{1})/,
+                  "$1-$2-$3"
+                )}
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Numero: </span>
                 {data.driver.number}
               </div>
@@ -108,23 +111,26 @@ const TrafficFineDetails = () => {
                   className="w-10 md:w-12"
                   alt=""
                 />
-                <h2 className="text-xl mb-2 md:text-2xl font-semibold ">
+                <h2 className="mb-2 text-xl font-semibold md:text-2xl ">
                   Agente
                 </h2>
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Nombre: </span>
                 {data.agent.name}
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Apellido: </span>
                 {data.agent.lastName}
               </div>
-              <div className="font-medium text-lg ">
+              <div className="text-lg font-medium ">
                 <span className="font-semibold">Cedula: </span>
-                {data.agent.agentId}
+                {data.agent.agentId.replace(
+                  /(\d{3})(\d{7})(\d{1})/,
+                  "$1-$2-$3"
+                )}
               </div>
-              <div className="font-medium text-lg ">
+              <div className="text-lg font-medium ">
                 <span className="font-semibold">Numero: </span>
                 {data.agent.number}
               </div>
@@ -137,21 +143,21 @@ const TrafficFineDetails = () => {
                 className="w-10 md:w-12"
                 alt=""
               />
-              <h2 className="text-xl mb-2 md:text-2xl font-semibold ">Multa</h2>
+              <h2 className="mb-2 text-xl font-semibold md:text-2xl ">Multa</h2>
             </div>
-            <span className="font-medium text-lg capitalize ">
+            <span className="text-lg font-medium capitalize ">
               <span className="font-semibold">Placa: </span>
               {data.carPlate}
             </span>
-            <span className="font-medium text-lg capitalize">
+            <span className="text-lg font-medium capitalize">
               <span className="font-semibold">Razon: </span>
               {data.reason.split(" ").slice(1).join(" ")}
             </span>
-            <div className="font-medium text-lg capitalize ">
+            <div className="text-lg font-medium capitalize ">
               <span className="font-semibold ">Comentario: </span>
               {data.comment}
             </div>
-            <div className="font-medium text-lg capitalize ">
+            <div className="text-lg font-medium capitalize ">
               <span className="font-semibold">RD$</span>
               {reasonData &&
                 reasonData
