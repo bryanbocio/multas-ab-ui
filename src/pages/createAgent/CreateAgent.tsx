@@ -6,9 +6,11 @@ import { AuthContextType } from "../../context/AuthContextType";
 import newRequest from "../../Request";
 import { useNavigate } from "react-router-dom";
 import { hasMultipleRoles } from "../../utils/Roles";
+import { format } from "../../utils/formatIdentityId";
 
 const CreateAgent = () => {
-  const { token,currentUser } = useContext(AuthContext) as AuthContextType;
+  const [formattedValue, setFormattedValue] = useState<string>("");
+  const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const role = hasMultipleRoles(currentUser.role);
   const [input, setInput] = useState<RegisterAgent>({
     identityUserId: "",
@@ -19,6 +21,7 @@ const CreateAgent = () => {
     phoneNumber: "",
     role: "AGENT",
   });
+
   const navigate = useNavigate();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -29,14 +32,23 @@ const CreateAgent = () => {
     },
   });
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedInputValue = format(event);
+    setFormattedValue(formattedInputValue);
+    setInput((prev) => ({
+      ...prev,
+      [event.target.name]: formattedInputValue,
+    }));
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(input);
   };
 
   useEffect(() => {
-    if(role != "ADMIN"){
-      navigate('/home')
+    if (role != "ADMIN") {
+      navigate("/home");
     }
     if (isSuccess) {
       navigate("/home");
@@ -50,7 +62,7 @@ const CreateAgent = () => {
         className="flex flex-col gap-2 md:gap-3 w-full md:w-[40%] inputs"
       >
         {isError && (
-          <span className="text-rose-500 font-semibold text-lg">Error</span>
+          <span className="text-lg font-semibold text-rose-500">Error</span>
         )}
         <input
           onChange={handleChange}
@@ -74,10 +86,12 @@ const CreateAgent = () => {
           placeholder="Correo"
         />
         <input
-          onChange={handleChange}
+          onChange={handleInputChange}
           type="text"
           name="identityUserId"
+          value={formattedValue}
           className="    p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full "
+          maxLength={13}
           placeholder="Cedula del agente"
         />
         <input
