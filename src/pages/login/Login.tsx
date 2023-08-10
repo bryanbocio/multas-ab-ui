@@ -26,19 +26,57 @@ const Login = () => {
   useEffect(() => {
     if (ok) {
       navigate("/home");
-      setIniciando(false)
+      setIniciando(false);
     }
     if (token) {
       navigate("/home");
     }
   }, [ok]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen md:flex-row bg-gray-50 dark:bg-[#222]">
+    <div className="flex flex-col items-center justify-center min-h-screen md:flex-row bg-gray-50 dark:bg-[#222] relative">
       <div className="block my-10 text-3xl font-semibold text-transparent uppercase md:hidden bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
         multasab
       </div>
+      <Link
+        to="/"
+        className="absolute top-10 left-10 text-[lightgray] block md:hidden"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-8 h-8"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+          />
+        </svg>
+      </Link>
       <div className="rounded-tl-[60px] rounded-tr-[60px] md:rounded-none  flex h-screen md:h-full  w-full  md:w-[50%] md:items-center justify-center bg-emerald-500/90  md:bg-transparent pt-12">
-        <div className="flex flex-col items-center justify-center flex-1 p-9 lg:p-14 scale-100 bg-transparent rounded-lg md:scale-110 item1 h-[550px] gap-8 md:bg-emerald-500/90 dark:md:bg-emerald-600">
+        <div className="flex flex-col items-center justify-center flex-1 p-9 lg:p-14 scale-100 bg-transparent rounded-lg md:scale-110 item1 h-[550px] gap-8 md:bg-emerald-500/90 dark:md:bg-emerald-600 relative">
+          <Link
+            to="/"
+            className="absolute top-10 left-10 text-[lightgray] hidden md:block"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-8 h-8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+              />
+            </svg>
+          </Link>
           <h2 className="text-4xl font-semibold text-white md:text-2xl">
             Inicio de sesion
           </h2>
@@ -68,7 +106,7 @@ const Login = () => {
             >
               ¿Olvidaste tu contraseña?
             </Link>
-            <button className="p-2 h-10 flex justify-center items-center mt-2 text-black transition duration-300 bg-gray-100 rounded-lg hover:bg-white">
+            <button className="flex items-center justify-center h-10 p-2 mt-2 text-black transition duration-300 bg-gray-100 rounded-lg hover:bg-white">
               {iniciando ? <ButtonLoader /> : "Iniciar sesion"}
             </button>
             <a
