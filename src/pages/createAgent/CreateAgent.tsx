@@ -6,10 +6,11 @@ import { AuthContextType } from "../../context/AuthContextType";
 import newRequest from "../../Request";
 import { useNavigate } from "react-router-dom";
 import { hasMultipleRoles } from "../../utils/Roles";
-import { format } from "../../utils/formatIdentityId";
+import { format, formatPhoneNumber } from "../../utils/formatIdentityId";
 
 const CreateAgent = () => {
   const [formattedValue, setFormattedValue] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const role = hasMultipleRoles(currentUser.role);
   const [input, setInput] = useState<RegisterAgent>({
@@ -37,10 +38,20 @@ const CreateAgent = () => {
     setFormattedValue(formattedInputValue);
     setInput((prev) => ({
       ...prev,
-      [event.target.name]: formattedInputValue.replace(/-/g, ''),
+      [event.target.name]: formattedInputValue.replace(/-/g, ""),
     }));
   };
 
+  const handleInputChangeNumber = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const formattedValue = formatPhoneNumber(event.target.value);
+    setPhoneNumber(formattedValue);
+    setInput((prev) => ({
+      ...prev,
+      phoneNumber: event.target.value.replace(/\D/g, ""),
+    }));
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(input);
@@ -95,11 +106,13 @@ const CreateAgent = () => {
           placeholder="Cedula del agente"
         />
         <input
-          onChange={handleChange}
+          onChange={handleInputChangeNumber}
+          value={phoneNumber}
           type="text"
           name="phoneNumber"
           className="    p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full "
           placeholder="Telefono"
+          maxLength={14}
         />
         <input
           onChange={handleChange}
