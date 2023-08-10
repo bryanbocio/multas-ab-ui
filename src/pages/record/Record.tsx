@@ -1,33 +1,33 @@
-import { useQuery } from "@tanstack/react-query";
-import Tarifario from "../tarifario/Tarifario";
-import { Multas } from "../../utils/type";
-import newRequest from "../../Request";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
-import Loader from "../loader/Loader";
-import Warnings from "../warnings/Warnings";
 import { hasMultipleRoles } from "../../utils/Roles";
-import ErrorComponent from "../errorComponent/ErrorComponent";
-const Tarifarios = () => {
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../Request";
+import { Multas } from "../../utils/type";
+import ErrorComponent from "../../components/errorComponent/ErrorComponent";
+import Loader from "../../components/loader/Loader";
+import Warnings from "../../components/warnings/Warnings";
+import Tarifario from "../../components/tarifario/Tarifario";
+
+const Record = () => {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const role = hasMultipleRoles(currentUser.role);
   const { data, error, isLoading } = useQuery({
-    queryKey: ["multas"],
+    queryKey: ["multasRecord"],
     queryFn: () => {
       return newRequest(token)
         .get(
-          role !== "USER"
+          role
             ? "TrafficFine"
             : `TrafficFine?IdentityDriver=${currentUser.given_name}`
         )
         .then((result) =>
-          result.data.data.filter((e: Multas) => e.status == "PENDIENTE")
+          result.data.data.filter((e: Multas) => e.status == "PAGADO")
         )
         .catch((error) => console.log(error));
     },
   });
-
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {error ? (
@@ -45,4 +45,4 @@ const Tarifarios = () => {
   );
 };
 
-export default Tarifarios;
+export default Record;

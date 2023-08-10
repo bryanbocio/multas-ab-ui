@@ -21,7 +21,7 @@ const Config: React.FC<Props> = ({ setOpenConfig }) => {
         <span></span>
         <span className="text-lg font-semibold">Opciones</span>
         <button
-          className="uppercase self-end"
+          className="self-end uppercase"
           onClick={() => setOpenConfig(false)}
         >
           <svg

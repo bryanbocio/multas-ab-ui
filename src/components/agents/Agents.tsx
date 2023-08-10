@@ -12,10 +12,10 @@ import { AgentType } from '../../utils/type';
 const Agents = () => {
     const { token } = useContext(AuthContext) as AuthContextType;
     const { data, error, isLoading } = useQuery({
-      queryKey: ["driver"],
+      queryKey: ["agent"],
       queryFn: () => {
         return newRequest(token)
-          .get("Driver")
+          .get("Agent")
           .then((result) => result.data.data)
           .catch((error) => console.log(error));
       },

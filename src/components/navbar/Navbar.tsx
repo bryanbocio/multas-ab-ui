@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../Request";
 import Config from "../config/Config";
@@ -20,6 +20,7 @@ const Navbar = () => {
         .catch((err) => console.log(err));
     },
   });
+  const { pathname } = useLocation();
   const basketCount = data && data.items.length;
   return (
     <nav className="sticky top-0 w-full p-5 bg-white border-b-[1px] border-gray-200 dark:border-[#444] dark:bg-[#333]  flex justify-between z-50">
@@ -44,7 +45,7 @@ const Navbar = () => {
             />
           </svg>
         </button>
-        {showMobile && <LeftBarMobile setShowMobile={setShowMobile}/>}
+        {showMobile && <LeftBarMobile setShowMobile={setShowMobile} />}
         <div className="text-3xl font-semibold text-transparent uppercase bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text">
           <Link to="/home">multasab</Link>
         </div>
@@ -81,24 +82,24 @@ const Navbar = () => {
               {basketCount}
             </span>
           )}
-          <Link to="/basket" className="dark:text-[lightgray] text-black">
+          <Link
+            to="/basket"
+            className={`dark:text-[lightgray]  ${
+              pathname === "/basket" && "text-emerald-500/90"
+            }`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-8 h-8"
+              className="w-7 h-7"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
           </Link>

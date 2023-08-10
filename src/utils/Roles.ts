@@ -1,9 +1,9 @@
-export const hasMultipleRoles = (roles: any): boolean => {
+export const hasMultipleRoles = (roles: any): string => {
   if (roles === "USER") {
-    return false;
+    return "USER"
   } else if (roles === "AGENT") {
-    return true; // El usuario tiene solo un rol (no es más que "User")
-  } else {
-    return roles.length > 1; // El usuario tiene más de un rol
+    return "AGENT" // El usuario tiene solo un rol (no es más que "User")
+  } else{
+    return "ADMIN" // El usuario tiene más de un rol
   }
 };

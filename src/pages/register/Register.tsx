@@ -5,29 +5,59 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import axios from "axios";
+import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
+import { format, formatPhoneNumber } from "../../utils/formatIdentityId";
+
 const Register = () => {
   const navigate = useNavigate();
+  const [formattedValue, setFormattedValue] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [inputs, setInputs] = useState<SignUp>({});
   const { token } = useContext(AuthContext) as AuthContextType;
-
+  const [registrando, setRegistrando] = useState<boolean>(false);
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedInputValue = format(event);
+    setFormattedValue(formattedInputValue);
+    setInputs((prev) => ({
+      ...prev,
+      identityUserId: formattedInputValue.replace(/-/g, ""),
+    }));
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { confirmPassword, ...info } = inputs;
+    console.log(inputs);
     try {
+      setRegistrando(true);
       await axios
         .post("https://localhost:5001/api/Account/register", info)
         .then(() => {
-          navigate("/");
+          setRegistrando(false);
+          navigate("/login");
         })
-        .catch((err) => console.log(err.response.data.errors));
+        .catch((err) => {
+          console.log(err.response.data.errors);
+          setRegistrando(false);
+        });
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleInputChangeNumber = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const formattedValue = formatPhoneNumber(event.target.value);
+    setPhoneNumber(formattedValue);
+    setInputs((prev) => ({
+      ...prev,
+      phoneNumber: event.target.value.replace(/\D/g, ""),
+    }));
+  };
+
   useEffect(() => {
     if (token) {
       navigate("/home");
@@ -48,8 +78,10 @@ const Register = () => {
             onSubmit={handleSubmit}
           >
             <input
-              onChange={handleOnChange}
+              onChange={handleInputChange}
               type="text"
+              value={formattedValue}
+              maxLength={13}
               name="identityUserId"
               className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
               placeholder="Cedula"
@@ -76,9 +108,11 @@ const Register = () => {
               placeholder="Apellido"
             />
             <input
-              onChange={handleOnChange}
+              onChange={handleInputChangeNumber}
               type="text"
               name="phoneNumber"
+              value={phoneNumber}
+              maxLength={14}
               className="rounded-lg border-[1px] border-gray-100 bg-transparent p-2 text-white placeholder-gray-100 caret-white outline-none"
               placeholder="Celular"
             />
@@ -97,12 +131,12 @@ const Register = () => {
               placeholder="Confirmar contraseña"
             />
 
-            <button className="p-2 mt-2 text-black transition duration-300 bg-gray-100 rounded-lg hover:bg-white">
-              Registrarme
+            <button className="flex items-center justify-center h-10 p-2 mt-2 text-black transition duration-300 bg-gray-100 rounded-lg hover:bg-white">
+              {registrando ? <ButtonLoader /> : "Registrarme"}
             </button>
             <span className="block mt-auto text-sm text-center text-gray-100 md:hidden">
               ¿Ya tienes cuenta?
-              <Link to="/" className="underline text-rose-500">
+              <Link to="/login" className="underline text-rose-500">
                 Inicia sesion
               </Link>
             </span>
@@ -121,7 +155,7 @@ const Register = () => {
 
           <span className="text-lg text-center text-[gray] mt-auto dark:text-[lightgray]">
             ¿Ya tienes cuenta?
-            <Link to="/" className="underline text-rose-500">
+            <Link to="/login" className="underline text-rose-500">
               Inicia sesion
             </Link>
           </span>

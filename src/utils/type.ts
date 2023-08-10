@@ -10,6 +10,8 @@ export interface Multas {
   longitude: string;
   dateCreated: Date;
   agentIdentity: string;
+  status: string;
+
 }
 export interface Basket {
   id: string;
@@ -67,6 +69,7 @@ export interface TrafficFine {
   longitude: string;
   dateCreated: Date;
   agentIdentity: string;
+  status?: string;
 }
 export interface SignIn {
   email: string;

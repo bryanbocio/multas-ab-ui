@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
@@ -7,7 +7,8 @@ import newRequest from "../../Request";
 import { Basket } from "../../utils/type";
 import Loader from "../../components/loader/Loader";
 import ErrorComponent from "../../components/errorComponent/ErrorComponent";
- const TrafficFineDetails = () => {
+const TrafficFineDetails = () => {
+  const [total, setTotal] = useState<number>(0);
   const { pathname } = useLocation();
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const trafficFineId = pathname.split("/")[2];
@@ -22,6 +23,15 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
         .catch((err) => console.log(err));
     },
   });
+  const { data: reasonData, isLoading: loadingReason } = useQuery({
+    queryKey: ["reasonsPricesDetails"],
+    queryFn: () => {
+      return newRequest(token)
+        .get("TrafficFine/reasons")
+        .then((results) => results.data)
+        .catch((err) => console.log(err));
+    },
+  });
   const { mutate } = useMutation({
     mutationFn: (newTodo: Basket) => {
       return newRequest(token).post("Basket", newTodo);
@@ -29,6 +39,9 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
     onSuccess: () => {
       queryClient.invalidateQueries(["basketItem"]);
       queryClient.invalidateQueries(["basketItemMobile"]);
+    },
+    onError: () => {
+      console.log("error");
     },
   });
   const AddToCart = () => {
@@ -38,20 +51,28 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
         {
           id: Math.floor(Math.random() * 1000000),
           trafficFineId: data.id,
-          trafficFinePrice: 400,
+          trafficFinePrice: total,
         },
       ],
     });
   };
+  useEffect(() => {
+    !loadingReason &&
+      setTotal(
+        reasonData
+          .filter((reason: any) => reason.reason == data.reason)
+          .map((obj: any) => obj.price)[0]
+      );
+  }, [data]);
   return (
-    <div className="flex flex-col gap-5  container justify-center items-center max-h-fit">
+    <div className="container flex flex-col items-center justify-center gap-5 max-h-fit">
       {error ? (
-        <ErrorComponent/>
+        <ErrorComponent />
       ) : isLoading ? (
-        <Loader/>
+        <Loader />
       ) : (
         <>
-          <div className="top flex flex-col md:flex-row gap-5 md:gap-10 w-full ">
+          <div className="flex flex-col w-full gap-5 top md:flex-row md:gap-10 ">
             <div className="left flex-1 bg-white dark:bg-[#444] rounded-lg shadow-md p-6 flex flex-col gap-2 dark:text-[whitesmoke]">
               <div className="flex items-center">
                 <img
@@ -59,25 +80,30 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
                   className="w-10 md:w-12"
                   alt=""
                 />
-                <h2 className="text-xl mb-2 md:text-2xl font-semibold ">
+                <h2 className="mb-2 text-xl font-semibold md:text-2xl ">
                   Conductor
                 </h2>
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Nombre: </span>
                 {data.driver.name}
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Apellido: </span>
                 {data.driver.lastName}
               </div>
-              <div className="font-medium text-lg ">
+              <div className="text-lg font-medium ">
                 <span className="font-semibold">Cedula: </span>
-                {data.driver.driverId}
+                {data.driver.driverId.replace(
+                  /(\d{3})(\d{7})(\d{1})/,
+                  "$1-$2-$3"
+                )}
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Numero: </span>
-                {data.driver.number}
+                {data.driver.number
+                  .replace(/\D/g, "")
+                  .replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")}
               </div>
             </div>
             <div className="right flex-1 bg-white dark:bg-[#444] rounded-lg shadow-md p-6 flex flex-col gap-2 dark:text-[whitesmoke]">
@@ -87,25 +113,30 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
                   className="w-10 md:w-12"
                   alt=""
                 />
-                <h2 className="text-xl mb-2 md:text-2xl font-semibold ">
+                <h2 className="mb-2 text-xl font-semibold md:text-2xl ">
                   Agente
                 </h2>
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Nombre: </span>
                 {data.agent.name}
               </div>
-              <div className="font-medium text-lg capitalize">
+              <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Apellido: </span>
                 {data.agent.lastName}
               </div>
-              <div className="font-medium text-lg ">
+              <div className="text-lg font-medium ">
                 <span className="font-semibold">Cedula: </span>
-                {data.agent.agentId}
+                {data.agent.agentId.replace(
+                  /(\d{3})(\d{7})(\d{1})/,
+                  "$1-$2-$3"
+                )}
               </div>
-              <div className="font-medium text-lg ">
+              <div className="text-lg font-medium ">
                 <span className="font-semibold">Numero: </span>
-                {data.agent.number}
+                {data.agent.number
+                  .replace(/\D/g, "")
+                  .replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")}
               </div>
             </div>
           </div>
@@ -116,26 +147,37 @@ import ErrorComponent from "../../components/errorComponent/ErrorComponent";
                 className="w-10 md:w-12"
                 alt=""
               />
-              <h2 className="text-xl mb-2 md:text-2xl font-semibold ">Multa</h2>
+              <h2 className="mb-2 text-xl font-semibold md:text-2xl ">Multa</h2>
             </div>
-            <span className="font-medium text-lg capitalize ">
+            <span className="text-lg font-medium capitalize ">
               <span className="font-semibold">Placa: </span>
               {data.carPlate}
             </span>
-            <span className="font-medium text-lg capitalize">
+            <span className="text-lg font-medium capitalize">
               <span className="font-semibold">Razon: </span>
-              {data.reason}
+              {data.reason.split(" ").slice(1).join(" ")}
             </span>
-            <span className="font-medium text-lg capitalize ">
+            <div className="text-lg font-medium capitalize ">
               <span className="font-semibold ">Comentario: </span>
               {data.comment}
-            </span>
-            <button
-              onClick={AddToCart}
-              className="bg-emerald-500 dark:bg-emerald-600  p-2 font-semibold text-white dark:text-[whitesmoke] rounded-lg"
-            >
-              Pagar luego
-            </button>
+            </div>
+            <div className="text-lg font-medium capitalize ">
+              <span className="font-semibold">RD$</span>
+              {reasonData &&
+                reasonData
+                  .filter((reason: any) => reason.reason == data.reason)
+                  .map((obj: any) => obj.price)
+                  .toLocaleString("en-US")}
+            </div>
+
+            {data.status === "PENDIENTE" && (
+              <button
+                onClick={AddToCart}
+                className="bg-emerald-500 dark:bg-emerald-600  p-2 font-semibold text-white dark:text-[whitesmoke] rounded-lg"
+              >
+                Pagar luego
+              </button>
+            )}
           </div>
         </>
       )}

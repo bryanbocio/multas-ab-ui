@@ -4,9 +4,15 @@ import { useMutation } from "@tanstack/react-query";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import newRequest from "../../Request";
+import { useNavigate } from "react-router-dom";
+import { hasMultipleRoles } from "../../utils/Roles";
+import { format, formatPhoneNumber } from "../../utils/formatIdentityId";
 
 const CreateAgent = () => {
-  const { token } = useContext(AuthContext) as AuthContextType;
+  const [formattedValue, setFormattedValue] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const { token, currentUser } = useContext(AuthContext) as AuthContextType;
+  const role = hasMultipleRoles(currentUser.role);
   const [input, setInput] = useState<RegisterAgent>({
     identityUserId: "",
     email: "",
@@ -16,28 +22,59 @@ const CreateAgent = () => {
     phoneNumber: "",
     role: "AGENT",
   });
+
+  const navigate = useNavigate();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(input);
   };
   const { mutate, isSuccess, isError } = useMutation({
     mutationFn: (newTodo: RegisterAgent) => {
       return newRequest(token).post("Account/registerbyadmin", newTodo);
     },
   });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedInputValue = format(event);
+    setFormattedValue(formattedInputValue);
+    setInput((prev) => ({
+      ...prev,
+      [event.target.name]: formattedInputValue.replace(/-/g, ""),
+    }));
+  };
+
+  const handleInputChangeNumber = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const formattedValue = formatPhoneNumber(event.target.value);
+    setPhoneNumber(formattedValue);
+    setInput((prev) => ({
+      ...prev,
+      phoneNumber: event.target.value.replace(/\D/g, ""),
+    }));
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(input);
   };
 
+  useEffect(() => {
+    if (role != "ADMIN") {
+      navigate("/home");
+    }
+    if (isSuccess) {
+      navigate("/home");
+    }
+  }, [isSuccess]);
   return (
     <div className="container flex justify-center p-2 ">
-
       <form
         action=""
-        onClick={handleSubmit}
+        onSubmit={handleSubmit}
         className="flex flex-col gap-2 md:gap-3 w-full md:w-[40%] inputs"
       >
+        {isError && (
+          <span className="text-lg font-semibold text-rose-500">Error</span>
+        )}
         <input
           onChange={handleChange}
           type="text"
@@ -60,18 +97,22 @@ const CreateAgent = () => {
           placeholder="Correo"
         />
         <input
-          onChange={handleChange}
+          onChange={handleInputChange}
           type="text"
           name="identityUserId"
+          value={formattedValue}
           className="    p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full "
+          maxLength={13}
           placeholder="Cedula del agente"
         />
         <input
-          onChange={handleChange}
+          onChange={handleInputChangeNumber}
+          value={phoneNumber}
           type="text"
           name="phoneNumber"
           className="    p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full "
           placeholder="Telefono"
+          maxLength={14}
         />
         <input
           onChange={handleChange}

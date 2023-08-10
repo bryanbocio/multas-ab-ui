@@ -23,6 +23,10 @@ import Basket from "./pages/basket/Basket";
 import { hasMultipleRoles } from "./utils/Roles";
 import CreateAgent from "./pages/createAgent/CreateAgent";
 import CheckAgent from "./pages/checkAgent/CheckAgent";
+import CheckOut from "./pages/checkOut/CheckOut";
+import PaymentSuccess from "./pages/paymentSuccess/PaymentSuccess";
+import Record from "./pages/record/Record";
+import Index from "./pages/index/Index";
 function App() {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -49,14 +53,21 @@ function App() {
   };
 
   const Private = ({ children }: { children: JSX.Element }) => {
-    if (!hasMultipleRoles(currentUser.role)) return <Navigate to="/home" />;
+    const role = hasMultipleRoles(currentUser.role);
+    if (role === "USER   ") {
+      return <Navigate to="/home" />;
+    }
 
     return children;
   };
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path:'/',
+      element:<Index/>
+    },
+    {
+      path: "/login",
       element: <Login />,
     },
     {
@@ -86,9 +97,7 @@ function App() {
         {
           path: "/drivers",
           element: (
-            <Private>
               <CheckDriver />
-            </Private>
           ),
         },
         {
@@ -101,11 +110,7 @@ function App() {
         },
         {
           path: "/createAgent",
-          element: (
-            <Private>
-              <CreateAgent />
-            </Private>
-          ),
+          element: <CreateAgent />,
         },
         {
           path: "trafficFineDetails/:id",
@@ -113,15 +118,23 @@ function App() {
         },
         {
           path: "/agents",
-          element: (
-            <Private>
-              <CheckAgent />
-            </Private>
-          ),
+          element: <CheckAgent />,
         },
         {
-          path: "basket",
+          path: "/checkout/:clientSecret",
+          element: <CheckOut />,
+        },
+        {
+          path: "/basket",
           element: <Basket />,
+        },
+        {
+          path: "/paymentSuccees",
+          element: <PaymentSuccess />,
+        },
+        {
+          path: "/record",
+          element: <Record />,
         },
       ],
     },

@@ -10,7 +10,7 @@ interface Props {
   setTotal: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
+const BasketItem: React.FC<Props> = ({ trafficFines }) => {
   const { token } = useContext(AuthContext) as AuthContextType;
   const { data, isLoading, error } = useQuery({
     queryKey: ["basketTrafficFines"],
@@ -21,7 +21,7 @@ const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
         .catch((err) => console.log(err));
     },
   });
-  const { data: reasonData } = useQuery({
+  const { data: reasonData, isLoading: loadingReason } = useQuery({
     queryKey: ["reasonsPrice"],
     queryFn: () => {
       return newRequest(token)
@@ -30,13 +30,6 @@ const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
         .catch((err) => console.log(err));
     },
   });
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setTotal(total + parseInt(e.target.value));
-    } else {
-      setTotal(total - parseInt(e.target.value));
-    }
-  };
 
   return (
     <div>
@@ -51,22 +44,18 @@ const BasketItem: React.FC<Props> = ({ trafficFines, setTotal, total }) => {
                   key="e.id"
                   className="flex gap-5 items-center border-b-[1px] p-2 border-zinc-200 dark:border-zinc-600"
                 >
-                  <input
-                    type="checkbox"
-                    className="hidden w-4 h-4 rounded-lg md:block"
-                    onChange={handleCheckboxChange}
-                    value={reasonData
-                      .filter((reason: any) => reason.reason == e.reason)
-                      .map((obj: any) => obj.price)}
-                  />
                   <div className="flex flex-col max-w-3xl gap-2">
-                    <span className="text-xl font-semibold">{e.reason}</span>
+                    <span className="text-xl font-semibold">
+                      {e.reason.split(" ").slice(1).join(" ")}
+                    </span>
                     <span className="text-lg font-medium">{e.comment}</span>
                     <span className="mt-2 font-medium">
                       RD$
-                      {reasonData
-                        .filter((reason: any) => reason.reason == e.reason)
-                        .map((obj: any) => obj.price)}
+                      {reasonData &&
+                        reasonData
+                          .filter((reason: any) => reason.reason == e.reason)
+                          .map((obj: any) => obj.price)
+                          .toLocaleString("en-US")}
                     </span>
                   </div>
                 </div>
