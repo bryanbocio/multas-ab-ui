@@ -55,11 +55,11 @@ const Index = () => {
 
       <section
         id="about"
-        className="h-auto md:h-[350px] bg-gray-100 dark:bg-[#222] py-10 md:py-0"
+        className="h-auto lg:h-[350px] bg-gray-100 dark:bg-[#222] py-10 lg:py-0 "
       >
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 gap-4 md:gap-10 md:grid-cols-3 place-items-center">
-            <div className="flex flex-col items-center justify-center gap-10 p-12 -mt-16 scale-100 w-[410px]  rounded-md md:scale-105 md:-mt-28 bg-emerald-500">
+          <div className="grid grid-cols-1 gap-4 lg:gap-10 lg:grid-cols-3 place-items-center">
+            <div className="flex flex-col items-center justify-center w-[90%] sm:w-[80%] lg:w-full gap-10 p-12 -mt-16 scale-100 rounded-md lg:scale-105 lg:-mt-28 bg-emerald-500">
               <h1 className="text-4xl font-semibold text-white">
                 ¿Por que MULTASAB?
               </h1>
@@ -70,7 +70,7 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="flex flex-col w-[410px] h-[300px] p-6 bg-white dark:bg-[#444] gap-8 rounded-md items-center md:-mt-16 dark:text-[lightgray]">
+            <div className="flex flex-col w-[90%] sm:w-[70%] lg:w-full h-[300px] p-6 bg-white dark:bg-[#444] gap-8 rounded-md items-center lg:-mt-16 dark:text-[lightgray]">
               <div className="flex flex-col items-center text-green">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="flex flex-col w-[410px] h-[300px] p-6 bg-white dark:bg-[#444] gap-8 rounded-md items-center md:-mt-16 dark:text-[lightgray]">
+            <div className="flex flex-col w-[90%] sm:w-[70%] lg:w-full h-[300px] p-6 bg-white dark:bg-[#444] gap-8 rounded-md items-center lg:-mt-16 dark:text-[lightgray]">
               <div className="flex flex-col items-center text-green">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +131,7 @@ const Index = () => {
         className="bg-[#fff9f7] dark:bg-[#333] pt-16 pb-32"
       >
         <div className="flex">
-          <div className="hidden w-full h-full blur-md md:block">
+          <div className="hidden w-full h-full blur-md lg:block">
             <img
               src="https://i0.wp.com/rnn.com.do/wp-content/uploads/2022/12/Digesett-1140x694-1.webp?fit=1030%2C627&ssl=1"
               alt=""
@@ -251,18 +251,18 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="container px-5 mx-auto mt-5 sm:px-0">
+        <div className="container px-5 mx-auto mt-5 lg:px-0">
           <div className="flex flex-col items-center justify-center gap-5">
             <span className="text-4xl font-semibold dark:text-[lightgray]">
               Servicios
             </span>
-            <p className="text-xl dark:text-[lightgray] flex-wrap flex justify-center">
+            <p className="text-xl dark:text-[lightgray] flex-wrap flex text-center">
               Dentro de MULTASAB le ofrecemos innumerables servicios, pero
               algunos de los más importantes son los siguientes:
             </p>
           </div>
 
-          <div className="grid gap-4 mt-20 grid-col-1 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 mt-20 md:grid-cols-2 lg:grid-cols-3">
             <div className="flex flex-col items-center gap-5 bg-white dark:bg-[#444] rounded-md shadow-md">
               <div className="p-3 -mt-6 rounded-full icon bg-emerald-500">
                 <span className="">
