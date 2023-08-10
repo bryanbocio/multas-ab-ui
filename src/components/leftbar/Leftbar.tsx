@@ -79,6 +79,18 @@ const Leftbar = () => {
             </Link>
           </div>
         )}
+                {role === "ADMIN" && (
+          <div className="dark:text-[lightgray] ">
+            <Link
+              to="/createDriver"
+              className={`text-lg font-medium ${
+                pathname === "/createDriver" && "text-emerald-600/90"
+              }`}
+            >
+              Crear Conductor
+            </Link>
+          </div>
+        )}
         <div className="dark:text-[lightgray] ">
           <Link
             to="/map"

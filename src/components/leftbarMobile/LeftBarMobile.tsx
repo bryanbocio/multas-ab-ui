@@ -107,6 +107,22 @@ const LeftBarMobile: React.FC<Props> = ({ setShowMobile }) => {
           </div>
         )}
 
+        {role === "ADMIN" && (
+          <div
+            className="dark:text-[lightgray] hover:bg-gray-200 dark:hover:bg-[#333] p-3 "
+            onClick={() => setShowMobile(false)}
+          >
+            <Link
+              to="/createDriver"
+              className={`text-xl font-medium ${
+                pathname === "/createDriver" && "text-emerald-600/90"
+              }`}
+            >
+              Crear Conductor
+            </Link>
+          </div>
+        )}
+
         <div
           className="dark:text-[lightgray] hover:bg-gray-200 dark:hover:bg-[#333] p-3 "
           onClick={() => setShowMobile(false)}

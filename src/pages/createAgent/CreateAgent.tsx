@@ -7,6 +7,7 @@ import newRequest from "../../Request";
 import { useNavigate } from "react-router-dom";
 import { hasMultipleRoles } from "../../utils/Roles";
 import { format, formatPhoneNumber } from "../../utils/formatIdentityId";
+import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 
 const CreateAgent = () => {
   const [formattedValue, setFormattedValue] = useState<string>("");
@@ -27,7 +28,7 @@ const CreateAgent = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const { mutate, isSuccess, isError } = useMutation({
+  const { mutate, isSuccess, isError, isLoading } = useMutation({
     mutationFn: (newTodo: RegisterAgent) => {
       return newRequest(token).post("Account/registerbyadmin", newTodo);
     },
@@ -73,13 +74,15 @@ const CreateAgent = () => {
         className="flex flex-col gap-2 md:gap-3 w-full md:w-[40%] inputs"
       >
         {isError && (
-          <span className="text-lg font-semibold text-rose-500">Error</span>
+          <span className="text-lg font-semibold text-rose-500">
+            Llena todos los campos
+          </span>
         )}
         <input
           onChange={handleChange}
           type="text"
           name="name"
-          className="    p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full "
+          className="p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full"
           placeholder="Nombre"
         />
         <input
@@ -123,7 +126,7 @@ const CreateAgent = () => {
         />
         <button className=" w-full p-4 font-medium text-white bg-gray-200 rounded-md border-[1px] border-gray-300 hover:bg-emerald-500/90 transition duration-300 group dark:bg-stone-600">
           <span className="text-base font-semibold text-transparent transition duration-300 lg:text-lg bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text dark:from-emerald-500 dark:via-yellow-500 dark:to-orange-500 group-hover:bg-transparent group-hover:text-white ">
-            Crear agente
+            {isLoading ? <ButtonLoader /> : " Crear agente"}
           </span>
         </button>
       </form>

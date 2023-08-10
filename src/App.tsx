@@ -27,6 +27,7 @@ import CheckOut from "./pages/checkOut/CheckOut";
 import PaymentSuccess from "./pages/paymentSuccess/PaymentSuccess";
 import Record from "./pages/record/Record";
 import Index from "./pages/index/Index";
+import CreateDriver from "./pages/createDriver/CreateDriver";
 function App() {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const queryClient = new QueryClient();
@@ -63,8 +64,8 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path:'/',
-      element:<Index/>
+      path: "/",
+      element: <Index />,
     },
     {
       path: "/login",
@@ -96,9 +97,7 @@ function App() {
         },
         {
           path: "/drivers",
-          element: (
-              <CheckDriver />
-          ),
+          element: <CheckDriver />,
         },
         {
           path: "/applyTrafficFine",
@@ -108,9 +107,14 @@ function App() {
             </Private>
           ),
         },
+
         {
           path: "/createAgent",
           element: <CreateAgent />,
+        },
+        {
+          path: "/createDriver",
+          element: <CreateDriver />,
         },
         {
           path: "trafficFineDetails/:id",

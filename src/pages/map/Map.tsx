@@ -20,6 +20,7 @@ const Map = () => {
         .catch((error) => console.error(error));
     },
   });
+
   return (
     <>
       {error ? (
@@ -44,7 +45,6 @@ const Map = () => {
         </GoogleMap>
       ) : (
         <div className="flex justify-center w-full">
-
         <Loader/>
         </div>
       )}

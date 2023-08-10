@@ -18,9 +18,11 @@ const Record = () => {
     queryFn: () => {
       return newRequest(token)
         .get(
-          role
-            ? "TrafficFine"
-            : `TrafficFine?IdentityDriver=${currentUser.given_name}`
+          role === "USER"
+            ? `TrafficFine?IdentityDriver=${currentUser.given_name}`
+            : role === "AGENT"
+            ? `TrafficFine?IdentityAgent=${currentUser.given_name}`
+            : "TrafficFine"
         )
         .then((result) =>
           result.data.data.filter((e: Multas) => e.status == "PAGADO")
