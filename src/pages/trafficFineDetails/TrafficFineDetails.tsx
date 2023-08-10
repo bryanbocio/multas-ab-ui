@@ -7,6 +7,7 @@ import newRequest from "../../Request";
 import { Basket } from "../../utils/type";
 import Loader from "../../components/loader/Loader";
 import ErrorComponent from "../../components/errorComponent/ErrorComponent";
+import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 const TrafficFineDetails = () => {
   const [total, setTotal] = useState<number>(0);
   const { pathname } = useLocation();
@@ -32,7 +33,7 @@ const TrafficFineDetails = () => {
         .catch((err) => console.log(err));
     },
   });
-  const { mutate } = useMutation({
+  const { mutate, isLoading: basketLoader } = useMutation({
     mutationFn: (newTodo: Basket) => {
       return newRequest(token).post("Basket", newTodo);
     },
@@ -173,9 +174,9 @@ const TrafficFineDetails = () => {
             {data.status === "PENDIENTE" && (
               <button
                 onClick={AddToCart}
-                className="bg-emerald-500 dark:bg-emerald-600  p-2 font-semibold text-white dark:text-[whitesmoke] rounded-lg"
+                className="bg-emerald-500 dark:bg-emerald-600  p-2 font-semibold text-white dark:text-[whitesmoke] rounded-lg w-36"
               >
-                Pagar luego
+                {basketLoader ? <ButtonLoader /> : "Pagar luego"}
               </button>
             )}
           </div>
