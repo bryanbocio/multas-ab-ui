@@ -5,9 +5,12 @@ import newRequest from "../../Request";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
+import { format } from "../../utils/formatIdentityId";
 
 const ApplyTrafficFine = () => {
   const queryClient = useQueryClient();
+  const [formattedValue, setFormattedValue] = useState<string>("");
+
   const { token, currentUser, location } = useContext(
     AuthContext
   ) as AuthContextType;
@@ -78,6 +81,15 @@ const ApplyTrafficFine = () => {
     },
   });
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedInputValue = format(event);
+    setFormattedValue(formattedInputValue);
+    setInputs((prev) => ({
+      ...prev,
+      [event.target.name]: formattedInputValue,
+    }));
+  };
+
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -126,7 +138,7 @@ const ApplyTrafficFine = () => {
         className="flex flex-col justify-center mx-auto w-[100%] gap-3 md:gap-5 p-5"
         onSubmit={handleSubmit}
       >
-        <div className="flex flex-col w-full gap-2 md:gap-10 md:flex-row">  
+        <div className="flex flex-col w-full gap-2 md:gap-10 md:flex-row">
           <div className="flex flex-col flex-1 gap-2 md:gap-3 inputs">
             <input
               onChange={handleChange}
@@ -164,9 +176,11 @@ const ApplyTrafficFine = () => {
                 ))}
             </select>
             <input
-              onChange={handleChange}
+              onChange={handleInputChange}
               type="text"
+              value={formattedValue}
               name="driverIdentity"
+              maxLength={13}
               className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full"
               placeholder="Cedula de conductor"
             />
