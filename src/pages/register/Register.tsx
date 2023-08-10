@@ -29,7 +29,6 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { confirmPassword, ...info } = inputs;
-    console.log(inputs);
     try {
       setRegistrando(true);
       await axios
