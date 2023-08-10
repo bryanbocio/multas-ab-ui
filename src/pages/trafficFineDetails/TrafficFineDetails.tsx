@@ -101,7 +101,9 @@ const TrafficFineDetails = () => {
               </div>
               <div className="text-lg font-medium capitalize">
                 <span className="font-semibold">Numero: </span>
-                {data.driver.number}
+                {data.driver.number
+                  .replace(/\D/g, "")
+                  .replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")}
               </div>
             </div>
             <div className="right flex-1 bg-white dark:bg-[#444] rounded-lg shadow-md p-6 flex flex-col gap-2 dark:text-[whitesmoke]">
@@ -132,7 +134,9 @@ const TrafficFineDetails = () => {
               </div>
               <div className="text-lg font-medium ">
                 <span className="font-semibold">Numero: </span>
-                {data.agent.number}
+                {data.agent.number
+                  .replace(/\D/g, "")
+                  .replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")}
               </div>
             </div>
           </div>
