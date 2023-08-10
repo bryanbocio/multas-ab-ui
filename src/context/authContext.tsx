@@ -21,14 +21,21 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
   );
 
   const [ok, setOk] = useState<boolean>(false);
+  const [logging, setLogging] = useState<boolean>(false);
+
   const login = async (inputs: SignIn): Promise<void> => {
-   await axios
+    setLogging(true);
+    await axios
       .post("https://localhost:5001/api/Account/login", inputs)
       .then((results) => {
+        setLogging(false);
         setToken(results.data.token);
         setOk(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLogging(false);
+        console.log(err);
+      });
   };
   const logout = () => {
     setToken(null);
@@ -66,7 +73,7 @@ const AuthContextProvider: React.FC<Props> = ({ children }) => {
   }, [token]);
   return (
     <AuthContext.Provider
-      value={{ login, ok, token, currentUser, logout, location }}
+      value={{ login, ok, token, currentUser, logout, location, logging }}
     >
       {children}
     </AuthContext.Provider>
