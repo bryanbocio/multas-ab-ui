@@ -9,7 +9,7 @@ const Leftbar = () => {
   const role = hasMultipleRoles(currentUser.role);
   const { pathname } = useLocation();
   return (
-    <div className=" hidden md:flex md:flex-col justify-between sticky flex-2 lg:flex-1 h-[calc(100vh_-_85px)] p-5 bg-white dark:bg-[#333] top-[85px] overflow-scroll">
+    <div className=" hidden md:flex md:flex-col justify-between sticky flex-2 lg:flex-1 h-[calc(100vh_-_85px)] p-5 bg-white dark:bg-[#333] top-[85px] overflow-scroll scroll-fire scroll">
       <div className="flex flex-col mt-5 gap-9">
         <div className="dark:text-[lightgray] ">
           <Link
@@ -100,7 +100,7 @@ const Leftbar = () => {
           </Link>
         </div>
       </div>
-      <div className="bg-transparent mt-5">
+      <div className="mt-5 bg-transparent">
         <div className="text-base font-semibold text-center text-transparent uppercase lg:text-lg bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text">
           Developed by group 6
         </div>
