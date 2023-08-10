@@ -5,12 +5,12 @@ import newRequest from "../../Request";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
-import { format } from "../../utils/formatIdentityId";
+import { format, formatPhoneNumber } from "../../utils/formatIdentityId";
 
 const ApplyTrafficFine = () => {
   const queryClient = useQueryClient();
   const [formattedValue, setFormattedValue] = useState<string>("");
-
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const { token, currentUser, location } = useContext(
     AuthContext
   ) as AuthContextType;
@@ -81,12 +81,22 @@ const ApplyTrafficFine = () => {
     },
   });
 
+  const handleInputChangeNumber = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const formattedValue = formatPhoneNumber(event.target.value);
+    setPhoneNumber(formattedValue);
+    setInputs((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value.replace(/\D/g, ""),
+    }));
+  };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const formattedInputValue = format(event);
     setFormattedValue(formattedInputValue);
     setInputs((prev) => ({
       ...prev,
-      [event.target.name]: formattedInputValue.replace(/-/g, ''),
+      [event.target.name]: formattedInputValue.replace(/-/g, ""),
     }));
   };
 
@@ -148,11 +158,13 @@ const ApplyTrafficFine = () => {
               placeholder="Nombre conductor"
             />
             <input
-              onChange={handleChange}
+              onChange={handleInputChangeNumber}
+              value={phoneNumber}
               type="text"
               name="driverPhoneNumber"
               className=" p-3 md:p-4 rounded-lg outline-none caret-emerald-500 border-[1px] border-gray-200 w-full"
               placeholder="Celular del conductor"
+              maxLength={14}
             />
             <input
               onChange={handleChange}
