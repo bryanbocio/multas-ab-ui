@@ -73,11 +73,11 @@ const Index = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-16 h-16"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#2c3e50"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M5.636 19.364a9 9 0 1 1 12.728 0" />
@@ -97,11 +97,11 @@ const Index = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-16 h-16"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#2c3e50"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
@@ -143,11 +143,11 @@ const Index = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-8 h-8"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#2c3e50"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M18.9 7a8 8 0 0 1 1.1 5v1a6 6 0 0 0 .8 3" />
@@ -174,11 +174,11 @@ const Index = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-9 h-9"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#2c3e50"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M5 5m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" />
@@ -210,11 +210,11 @@ const Index = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-9 w-9"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#2c3e50"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M12 12v.01" />
@@ -254,7 +254,7 @@ const Index = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-10 h-10"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="#ffffff"
                     fill="none"
                     strokeLinecap="round"
@@ -428,7 +428,7 @@ const Index = () => {
             <div className="flex flex-col gap-5 overflow-hidden bg-white rounded-md shadow-md hover:-translate-y-5">
               <div>
                 <img
-                  src="https://images.pexels.com/photos/3109671/pexels-photo-3109671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  src="https://i.ibb.co/3hKNT6N/Whats-App-Image-2023-08-09-at-1-44-43-PM.jpg"
                   alt=""
                   className="object-cover w-full h-80"
                 />
