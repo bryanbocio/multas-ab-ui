@@ -37,7 +37,7 @@ const CreateAgent = () => {
     setFormattedValue(formattedInputValue);
     setInput((prev) => ({
       ...prev,
-      [event.target.name]: formattedInputValue,
+      [event.target.name]: formattedInputValue.replace(/-/g, ''),
     }));
   };
 

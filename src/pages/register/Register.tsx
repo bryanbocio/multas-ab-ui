@@ -22,7 +22,7 @@ const Register = () => {
     setFormattedValue(formattedInputValue);
     setInputs((prev) => ({
       ...prev,
-      identityUserId: formattedInputValue,
+      identityUserId: formattedInputValue.replace(/-/g, ''),
     }));
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
