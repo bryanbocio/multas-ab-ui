@@ -10,7 +10,11 @@ const Agent: React.FC<Props> = ({ agent }) => {
       <h2 className="text-xl font-semibold">
         {agent.name} {agent.lastName}
       </h2>
-      <span className="text-xl font-normal ">{agent.phoneNumber}</span>
+      <span className="text-xl font-normal ">
+        {agent.phoneNumber
+          .replace(/\D/g, "")
+          .replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")}
+      </span>
       <span className="text-xl font-normal ">
         {agent.agentIdentity.replace(/(\d{3})(\d{7})(\d{1})/, "$1-$2-$3")}
       </span>
