@@ -577,7 +577,7 @@ const Index = () => {
               . All Rights Reserved
             </div>
             <div className="font-semibold text-center text-transparent uppercase bg-gradient-to-r from-indigo-600 via-pink-500 to-red-500 bg-clip-text">
-              Developed by group 6
+groupo 6
             </div>
           </div>
         </div>

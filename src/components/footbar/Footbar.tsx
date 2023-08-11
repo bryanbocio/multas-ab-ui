@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../context/themeContext";
 import { ThemeContextType } from "../../context/ThemeContextType";
 import { useQuery } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import { AuthContextType } from "../../context/AuthContextType";
 const Footbar = () => {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const { toggle, darkMode } = useContext(ThemeContext) as ThemeContextType;
+  const navigate = useNavigate();
   const { data } = useQuery({
     queryKey: ["basketItemMobile"],
     queryFn: () => {
@@ -62,33 +63,31 @@ const Footbar = () => {
             </>
           )}
         </button>
-        <div className="relative block cursor-pointer md:hidden">
+        <div
+          className="relative block cursor-pointer md:hidden"
+          onClick={() => navigate("/basket")}
+        >
           {data && data.items.length !== 0 && (
             <span className="absolute right-0 flex items-center justify-center w-4 h-4 p-1 text-xs text-white rounded-full -top-0 bg-rose-500">
               {data.items.length}
             </span>
           )}
-          <Link to="/basket" className="dark:text-[lightgray] text-black">
+          <span className="dark:text-[lightgray] text-black">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-8 h-8"
+              className="w-7 h-7"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
-          </Link>
+          </span>
         </div>
       </div>
     </div>

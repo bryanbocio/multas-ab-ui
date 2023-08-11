@@ -6,9 +6,10 @@ import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
 import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 const Login = () => {
-  const { login, ok, token } = useContext(AuthContext) as AuthContextType;
+  const { login, ok, token, logging } = useContext(
+    AuthContext
+  ) as AuthContextType;
   const [email, setEmail] = useState<string>("");
-  const [iniciando, setIniciando] = useState<boolean>(false);
 
   const [error, setError] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -19,14 +20,12 @@ const Login = () => {
       setError(true);
       return;
     }
-    setIniciando(true);
     login({ email, password });
   };
 
   useEffect(() => {
     if (ok) {
       navigate("/home");
-      setIniciando(false);
     }
     if (token) {
       navigate("/home");
@@ -107,7 +106,7 @@ const Login = () => {
               ¿Olvidaste tu contraseña?
             </Link>
             <button className="flex items-center justify-center h-10 p-2 mt-2 text-black transition duration-300 bg-gray-100 rounded-lg hover:bg-white">
-              {iniciando ? <ButtonLoader /> : "Iniciar sesion"}
+              {logging ? <ButtonLoader /> : "Iniciar sesion"}
             </button>
             <a
               href=""

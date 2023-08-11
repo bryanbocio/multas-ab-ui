@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../Request";
 import Config from "../config/Config";
@@ -10,6 +10,7 @@ import LeftBarMobile from "../leftbarMobile/LeftBarMobile";
 const Navbar = () => {
   const { token, currentUser } = useContext(AuthContext) as AuthContextType;
   const [showMobile, setShowMobile] = useState<boolean>(false);
+  const navigate = useNavigate();
   const [openConfig, setOpenConfig] = useState<boolean>(false);
   const { data } = useQuery({
     queryKey: ["basketItem"],
@@ -75,15 +76,17 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="items-center hidden gap-5 md:flex relative">
-        <div className="relative cursor-pointer">
+      <div className="relative items-center hidden gap-5 md:flex">
+        <div
+          className="relative cursor-pointer"
+          onClick={() => navigate("/basket")}
+        >
           {basketCount > 0 && (
-            <span className="absolute -top-0 right-0 bg-rose-500 rounded-full h-4 w-4 p-1 text-xs text-white flex items-center justify-center">
+            <span className="absolute right-0 flex items-center justify-center w-4 h-4 p-1 text-xs text-white rounded-full -top-0 bg-rose-500">
               {basketCount}
             </span>
           )}
-          <Link
-            to="/basket"
+          <span
             className={`dark:text-[lightgray]  ${
               pathname === "/basket" && "text-emerald-500/90"
             }`}
@@ -102,11 +105,11 @@ const Navbar = () => {
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
-          </Link>
+          </span>
         </div>
 
         <img
-          className="rounded-full w-11 h-11 cursor-pointer"
+          className="rounded-full cursor-pointer w-11 h-11"
           src="https://images.pexels.com/photos/17168340/pexels-photo-17168340.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt=""
           onClick={() => setOpenConfig(!openConfig)}
