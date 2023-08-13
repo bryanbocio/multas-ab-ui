@@ -21,6 +21,7 @@ const Navbar = () => {
         .catch((err) => console.log(err));
     },
   });
+  
   const { pathname } = useLocation();
   const basketCount = data && data.items.length;
   return (
