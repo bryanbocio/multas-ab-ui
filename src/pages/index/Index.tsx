@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { AuthContextType } from "../../context/AuthContextType";
+import ScrollTop from "../../components/scrollTop/ScrollTop";
 
 const Index = () => {
   const { token } = useContext(AuthContext) as AuthContextType;
@@ -582,6 +583,7 @@ groupo 6
           </div>
         </div>
       </footer>
+      <ScrollTop/>
     </div>
   );
 };
